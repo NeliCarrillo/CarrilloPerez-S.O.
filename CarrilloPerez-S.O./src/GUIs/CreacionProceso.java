@@ -52,7 +52,7 @@ public class CreacionProceso extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel3.setText("Tipo de Proceso:");
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I/O Bound", "CPU Bound" }));
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "I/O Bound", "CPU Bound", " " }));
         tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoActionPerformed(evt);
@@ -132,7 +132,9 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        
+        if(tipo.getSelectedItem()=="CPU Bound"){
+        //continuar a la otra gui
+    }
     }//GEN-LAST:event_saveActionPerformed
 
     /**

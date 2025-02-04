@@ -120,9 +120,11 @@
         <Component class="javax.swing.JComboBox" name="tipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="I/O Bound"/>
-                <StringItem index="1" value="CPU Bound"/>
+              <StringArray count="4">
+                <StringItem index="0" value="..."/>
+                <StringItem index="1" value="I/O Bound"/>
+                <StringItem index="2" value="CPU Bound"/>
+                <StringItem index="3" value=" "/>
               </StringArray>
             </Property>
           </Properties>
