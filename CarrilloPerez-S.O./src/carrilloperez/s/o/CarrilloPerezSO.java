@@ -16,9 +16,6 @@ public class CarrilloPerezSO {
     public static void main(String[] args) {
         // TODO code application logic here
         Inicio inicio = new Inicio();
-        inicio.setVisible(true);
-        inicio.setLocationRelativeTo(null);
-        inicio.setResizable(false);
     }
     
 }

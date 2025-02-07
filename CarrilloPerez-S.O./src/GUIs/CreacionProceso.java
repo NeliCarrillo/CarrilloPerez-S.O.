@@ -15,6 +15,7 @@ public class CreacionProceso extends javax.swing.JFrame {
      */
     public CreacionProceso() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -134,6 +135,7 @@ public class CreacionProceso extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tipo.getSelectedItem()=="CPU Bound"){
         //continuar a la otra gui
+        IOBound especificaciones = new IOBound();
     }
     }//GEN-LAST:event_saveActionPerformed
 

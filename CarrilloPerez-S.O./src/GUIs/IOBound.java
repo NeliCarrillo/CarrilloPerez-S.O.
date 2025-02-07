@@ -15,6 +15,7 @@ public class IOBound extends javax.swing.JFrame {
      */
     public IOBound() {
         initComponents();
+        setVisible(true);
     }
 
     /**
