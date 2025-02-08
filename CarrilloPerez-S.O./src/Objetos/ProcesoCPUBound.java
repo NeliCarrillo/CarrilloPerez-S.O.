@@ -8,6 +8,17 @@ package Objetos;
  *
  * @author nelsoncarrillo
  */
-public class ProcesoCPUBound {
-    
+public class ProcesoCPUBound extends Proceso {
+
+    // Constructor
+    public ProcesoCPUBound(String nombre, int numeroInstrucciones, int prioridad) {
+        super(nombre, numeroInstrucciones, "CPU Bound", prioridad);
+    }
+
+    // Implementación del método ejecutar
+    @Override
+    public void ejecutar() {
+        System.out.println("Ejecutando proceso CPU Bound: " + getNombre());
+        // Aquí puedes simular la ejecución de instrucciones
+    }
 }
