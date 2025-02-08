@@ -35,6 +35,8 @@ public class CreacionProceso extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tipo = new javax.swing.JComboBox<>();
         save = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        prioridad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +51,12 @@ public class CreacionProceso extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel2.setText("Cantidad de Instrucciones:");
+
+        qtyInstrucciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                qtyInstruccionesActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel3.setText("Tipo de Proceso:");
@@ -68,6 +76,9 @@ public class CreacionProceso extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
+        jLabel4.setText("Prioridad del Proceso:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,12 +91,14 @@ public class CreacionProceso extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(qtyInstrucciones)
-                            .addComponent(tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(132, 132, 132))
         );
         jPanel1Layout.setVerticalGroup(
@@ -103,9 +116,13 @@ public class CreacionProceso extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(save)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,6 +155,10 @@ public class CreacionProceso extends javax.swing.JFrame {
         IOBound especificaciones = new IOBound();
     }
     }//GEN-LAST:event_saveActionPerformed
+
+    private void qtyInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qtyInstruccionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_qtyInstruccionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,8 +199,10 @@ public class CreacionProceso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombre;
+    private javax.swing.JTextField prioridad;
     private javax.swing.JTextField qtyInstrucciones;
     private javax.swing.JButton save;
     public javax.swing.JComboBox<String> tipo;

@@ -15,6 +15,9 @@ public class Simulacion extends javax.swing.JFrame {
      */
     public Simulacion() {
         initComponents();
+        this.listos.setEditable(false);
+        this.bloqueados.setEditable(false);
+        this.terminados.setEditable(false);
     }
 
     /**
