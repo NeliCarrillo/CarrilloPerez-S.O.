@@ -1,8 +1,6 @@
 package Objetos;
-/**
- *
- * @author nelsoncarrillo
- */
+
+
 public class Proceso{
     private static int contadorID = 0; // Generador de IDs únicos
     private int id;
@@ -13,6 +11,8 @@ public class Proceso{
     private String tipo; // "CPU Bound" o "IO Bound"
     private int prioridad;
     private String estado; // Ready, Running, Blocked
+    private int PC;
+    private int MAR;
 
     // Constructor para los CPU Bound
     public Proceso(String nombre, int numeroInstrucciones, String tipo, int prioridad) {
@@ -22,6 +22,8 @@ public class Proceso{
         this.tipo = tipo;
         this.prioridad = prioridad;
         this.estado = "Ready"; // Todos los procesos inician en Ready
+        this.PC = 1;
+        this.MAR = PC -1;
     }
     
     //Constructor para los I/O Bound
@@ -34,6 +36,8 @@ public class Proceso{
         this.tipo = tipo;
         this.prioridad = prioridad;
         this.estado = "Ready"; // Todos los procesos inician en Ready
+        this.PC = 1;
+        this.MAR = PC -1;
     }
 
     // Getters y Setters
@@ -96,9 +100,25 @@ public class Proceso{
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+    public int getPC() {
+        return PC;
+    }
+
+    public void setPC(int PC) {
+        this.PC = PC;
+    }
+
+    public int getMAR() {
+        return MAR;
+    }
+
+    public void setMAR(int MAR) {
+        this.MAR = MAR;
+    }
+ 
     public String print() {
-        String fin = "ID: " + this.id + ", Nombre: " + this.nombre + ", Número de Instrucciones: " + this.numeroInstrucciones + ", Tipo: " + this.tipo + ", Prioridad: " + this.prioridad + ", Estado: " + this.estado;
+        String fin = "ID: " + this.id + ", Status: " + this.estado + ", Nombre: " + this.nombre + ", PC: " + this.PC + ", MAR: " + this.MAR;
         return fin;
     }
 
