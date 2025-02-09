@@ -5,6 +5,7 @@
 package Objetos;
 
 import EDD.Cola;
+import GUIs.Simulacion;
 
 /**
  *
@@ -18,14 +19,16 @@ public class Procesador extends Thread {
     private boolean activo; // Indica si el procesador está activo
     private int ciclosEjecutados; // Contador de ciclos ejecutados por este procesador
     private int cicloReloj; // Duración del ciclo de reloj en milisegundos
+    private Simulacion simulacion;
 
-    public Procesador(int id, Cola colaListos, Semaforo semaforo, int cicloReloj) {
+    public Procesador(int id, Cola colaListos, Semaforo semaforo, int cicloReloj,Simulacion simulacion) {
         this.id = id;
         this.colaListos = colaListos;
         this.semaforo = semaforo;
         this.activo = true;
         this.ciclosEjecutados = 0;
         this.cicloReloj = cicloReloj; 
+        this.simulacion = simulacion;
     }
 
     @Override
@@ -36,6 +39,8 @@ public class Procesador extends Thread {
                 semaforo.adquirir(); // Bloqueo para acceder a la cola de listos
                 if (!colaListos.estaVacia()) {
                     procesoActual = colaListos.obtenerProceso(); // Obtener el siguiente proceso
+                    procesoActual.setEstado("Running");
+                    this.simulacion.actualizarListos();
                 }
                 semaforo.liberar(); // Liberar el semáforo
 
@@ -56,15 +61,18 @@ public class Procesador extends Thread {
         System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
         while (proceso.getNumeroInstrucciones() > 0) {
             try {
+                this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+", STATUS: "+this.procesoActual.getEstado()+", Nombre: "+this.procesoActual.getNombre()+", PC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
                 Thread.sleep(cicloReloj); // Simular la ejecución de una instrucción (ajustado al ciclo de reloj)
                 proceso.setNumeroInstrucciones(proceso.getNumeroInstrucciones()-1);
                 ciclosEjecutados++;
+                this.procesoActual.setPC(this.procesoActual.getPC()+1);
                 System.out.println("Procesador " + id + " ejecutó una instrucción. Instrucciones restantes: " + proceso.getNumeroInstrucciones());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
+        this.simulacion.getInstancia().actualizarTextoArea("S.O.",this.id);
         procesoActual = null; // Liberar el procesador
     }
 
@@ -84,7 +92,7 @@ public class Procesador extends Thread {
         return cicloReloj;
     }
 
-    public void setCicloReloj(int cicloReloj) {
+    public synchronized void setCicloReloj(int cicloReloj) {
         this.cicloReloj = cicloReloj; // Permitir cambiar el ciclo de reloj dinámicamente
         System.out.println("Procesador " + id + ": Ciclo de reloj actualizado a " + cicloReloj + " ms.");
     }

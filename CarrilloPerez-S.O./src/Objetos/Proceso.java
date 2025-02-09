@@ -107,6 +107,7 @@ public class Proceso{
 
     public void setPC(int PC) {
         this.PC = PC;
+        this.MAR= PC-1;
     }
 
     public int getMAR() {
