@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package EDD;
 
 import Objetos.Proceso;
@@ -37,7 +33,7 @@ public class Cola {
     }
 
     // Método para eliminar un elemento de la cola
-    public Proceso remover() {
+    public Proceso obtenerProceso() {
         if (estaVacia()) {
             System.out.println("La cola está vacía. No se puede remover un elemento.");
             return null;
@@ -51,33 +47,25 @@ public class Cola {
         return elemento;
     }
 
-    // Método para obtener el elemento del frente sin eliminarlo
-    public Proceso obtenerFrente() {
-        if (estaVacia()) {
-            System.out.println("La cola está vacía.");
-            return null;
-        }
-        return frente.getElemento();
-    }
-
     // Método para obtener el tamaño de la cola
     public int getTamaño() {
         return tamaño;
     }
+    
+    public String print() {
+        String resultado = ""; // Inicializamos un String vacío
 
-    // Método para recorrer y mostrar los elementos de la cola
-    public void recorrer() {
-        if (estaVacia()) {
-            System.out.println("La cola está vacía.");
-            return;
+        // Usamos un ciclo for para recorrer la cola
+        Nodo actual = frente; // Comenzamos desde el nodo frente
+        for (int i = 0; i < tamaño; i++) {
+            if (actual != null) {
+                Proceso proceso = actual.getElemento(); // Obtener el proceso del nodo actual
+                resultado += proceso.print()+"\n\n";
+                actual = actual.getSiguiente(); // Mover al siguiente nodo
+            }
         }
-        Nodo actual = frente;
-        System.out.println("Elementos en la cola:");
-        while (actual != null) {
-            //System.out.println("Proceso ID: " + actual.getElemento().getId() + 
-             //                  ", Nombre: " + actual.getElemento().getNombre() +
-             //                  ", Estado: " + actual.getElemento().getEstado());
-            actual = actual.getSiguiente();
-        }
+
+        return resultado; // Devolver el resultado como un String
     }
+    
 }

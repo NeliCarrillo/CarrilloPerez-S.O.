@@ -4,12 +4,19 @@
  */
 package GUIs;
 
+import EDD.Cola;
+import static GUIs.CreacionProceso.colaListos;
+import Objetos.Proceso;
+
+
 /**
  *
  * @author nelsoncarrillo
  */
 public class Simulacion extends javax.swing.JFrame {
-
+    
+    Cola colaL = colaListos;
+    
     /**
      * Creates new form Simulacion
      */
@@ -18,8 +25,12 @@ public class Simulacion extends javax.swing.JFrame {
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
         this.terminados.setEditable(false);
+        actualizarListos();
     }
 
+    private void actualizarListos(){
+        this.listos.setText(colaL.print());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

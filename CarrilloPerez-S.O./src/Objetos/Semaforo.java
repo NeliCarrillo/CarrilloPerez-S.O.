@@ -1,32 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Objetos;
-
 /**
  *
  * @author nelsoncarrillo
  */
 public class Semaforo {
-    private int permisos; // Número de permisos disponibles
+    private int contador; // Contador del semáforo
 
-    // Constructor: inicializa el semáforo con un número de permisos
-    public Semaforo(int permisos) {
-        this.permisos = permisos;
+    public Semaforo() {
+        this.contador = 1;
     }
-
-    // Método para adquirir un permiso (bloquea si no hay permisos disponibles)
-    public synchronized void adquirir() throws InterruptedException {
-        while (permisos <= 0) {
-            wait(); // Esperar hasta que haya un permiso disponible
+    
+    // Método para adquirir el semáforo (decrementar el contador)
+    public synchronized void adquirir() {
+        while (contador == 0) {
+            try {
+                wait(); // Esperar hasta que el semáforo esté disponible
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restaurar el estado de interrupción
+                System.out.println("Hilo interrumpido mientras esperaba el semáforo.");
+            }
         }
-        permisos--; // Reducir el número de permisos disponibles
+        contador--; // Decrementar el contador
     }
 
-    // Método para liberar un permiso (notifica a los hilos en espera)
+    // Método para liberar el semáforo (incrementar el contador)
     public synchronized void liberar() {
-        permisos++; // Incrementar el número de permisos disponibles
+        contador++; // Incrementar el contador
         notify(); // Notificar a un hilo en espera
     }
 }

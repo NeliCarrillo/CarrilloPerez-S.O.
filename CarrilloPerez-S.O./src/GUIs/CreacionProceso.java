@@ -4,12 +4,19 @@
  */
 package GUIs;
 
+import EDD.Cola;
+import Objetos.ProcesoCPUBound;
+
 /**
  *
  * @author nelsoncarrillo
  */
 public class CreacionProceso extends javax.swing.JFrame {
 
+    
+    static Cola colaListos = new Cola();
+
+    
     /**
      * Creates new form CreacionProceso
      */
@@ -17,7 +24,15 @@ public class CreacionProceso extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
     }
+    
+    private void clear(){
+        this.nombre.setText("");
+        this.prioridad.setText("");
+        this.qtyInstrucciones.setText("");
+        this.tipo.setSelectedIndex(0);
+    }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +52,7 @@ public class CreacionProceso extends javax.swing.JFrame {
         save = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         prioridad = new javax.swing.JTextField();
+        Finalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +85,7 @@ public class CreacionProceso extends javax.swing.JFrame {
         });
 
         save.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
-        save.setText("Guardar");
+        save.setText("Añadir");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
@@ -79,12 +95,19 @@ public class CreacionProceso extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel4.setText("Prioridad del Proceso:");
 
+        Finalizar.setText("Fin");
+        Finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinalizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
+                .addContainerGap(102, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -98,8 +121,10 @@ public class CreacionProceso extends javax.swing.JFrame {
                             .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(qtyInstrucciones)
                             .addComponent(tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(132, 132, 132))
+                            .addComponent(prioridad))))
+                .addGap(33, 33, 33)
+                .addComponent(Finalizar)
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,8 +145,10 @@ public class CreacionProceso extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save)
+                    .addComponent(Finalizar))
                 .addGap(32, 32, 32))
         );
 
@@ -150,15 +177,24 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        if(tipo.getSelectedItem()=="CPU Bound"){
-        //continuar a la otra gui
-        IOBound especificaciones = new IOBound();
-    }
+        String nombrel = nombre.getText();
+        int inst = Integer.parseInt(this.qtyInstrucciones.getText());
+        int prio = Integer.parseInt(this.prioridad.getText());
+        clear();
+        ProcesoCPUBound ele = new ProcesoCPUBound(nombrel,inst,prio);
+        CreacionProceso.colaListos.agregar(ele);
     }//GEN-LAST:event_saveActionPerformed
 
     private void qtyInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qtyInstruccionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_qtyInstruccionesActionPerformed
+
+    private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
+        // TODO add your handling code here:
+        Simulacion sim = new Simulacion();
+        sim.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_FinalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +232,7 @@ public class CreacionProceso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Finalizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

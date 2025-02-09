@@ -66,6 +66,11 @@ public abstract class Proceso {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
+    public String print() {
+        String fin = "ID: " + this.id + ", Nombre: " + this.nombre + ", Número de Instrucciones: " + this.numeroInstrucciones + ", Tipo: " + this.tipo + ", Prioridad: " + this.prioridad + ", Estado: " + this.estado;
+        return fin;
+    }
 
     // Método abstracto para implementar comportamiento específico
     public abstract void ejecutar();
