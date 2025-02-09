@@ -5,7 +5,7 @@
 package GUIs;
 
 import EDD.Cola;
-import Objetos.ProcesoCPUBound;
+import Objetos.Proceso;
 
 /**
  *
@@ -181,7 +181,7 @@ public class CreacionProceso extends javax.swing.JFrame {
         int inst = Integer.parseInt(this.qtyInstrucciones.getText());
         int prio = Integer.parseInt(this.prioridad.getText());
         clear();
-        ProcesoCPUBound ele = new ProcesoCPUBound(nombrel,inst,prio);
+        Proceso ele = new Proceso(nombrel,inst,"ol",prio);
         CreacionProceso.colaListos.agregar(ele);
     }//GEN-LAST:event_saveActionPerformed
 
