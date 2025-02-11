@@ -4,18 +4,33 @@
  */
 package GUIs;
 
+import static GUIs.CreacionProceso.colaListos;
+import Objetos.Proceso;
+
 /**
  *
  * @author nelsoncarrillo
  */
 public class IOBound extends javax.swing.JFrame {
-
+    private CreacionProceso inty;
+    private int instruc;
+    private String name; 
+    private int prio;
     /**
      * Creates new form IOBound
+     * @param inty
      */
-    public IOBound() {
+    public IOBound(CreacionProceso intey,String name,int instruc,int prio) {
         initComponents();
         setVisible(true);
+        inty = intey;
+        this.instruc = instruc;
+        this.name = name;
+        this.prio=prio;
+    }
+
+    private IOBound() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -48,6 +63,11 @@ public class IOBound extends javax.swing.JFrame {
         });
 
         save.setText("Guardar");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,14 +81,14 @@ public class IOBound extends javax.swing.JFrame {
                             .addGap(78, 78, 78)
                             .addComponent(jLabel1))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(155, 155, 155)
-                            .addComponent(ciclosexcepcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addGap(68, 68, 68)
                             .addComponent(jLabel2))
                         .addGroup(layout.createSequentialGroup()
+                            .addGap(155, 155, 155)
+                            .addComponent(ciclosexcepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
                             .addGap(157, 157, 157)
-                            .addComponent(cicloscompletar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cicloscompletar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,6 +113,17 @@ public class IOBound extends javax.swing.JFrame {
     private void cicloscompletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cicloscompletarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cicloscompletarActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+        int ciclose = Integer.parseInt(this.ciclosexcepcion.getText());
+        int ciclosc =Integer.parseInt(this.cicloscompletar.getText());
+        Proceso ele = new Proceso(this.name,this.instruc,"I/O Bound",this.prio,ciclose,ciclosc);
+        System.out.println("se agrego io bound");
+        colaListos.agregar(ele);
+        inty.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_saveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,10 +153,8 @@ public class IOBound extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IOBound().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new IOBound().setVisible(true);
         });
     }
 

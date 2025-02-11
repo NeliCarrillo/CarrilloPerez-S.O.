@@ -15,7 +15,7 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     
     static Cola colaListos = new Cola();
-    private String tipot="";
+    private String tipot="CPU Bound";
 
     
     /**
@@ -26,12 +26,13 @@ public class CreacionProceso extends javax.swing.JFrame {
         setVisible(true);
     }
     
-    private void clear(){
+    
+    public void clear(){
         this.nombre.setText("");
         this.prioridad.setText("");
         this.qtyInstrucciones.setText("");
     }
-
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,6 +88,12 @@ public class CreacionProceso extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel4.setText("Prioridad del Proceso:");
+
+        prioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prioridadActionPerformed(evt);
+            }
+        });
 
         Finalizar.setText("Fin");
         Finalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -176,15 +183,15 @@ public class CreacionProceso extends javax.swing.JFrame {
         String nombrel = nombre.getText();
         int inst = Integer.parseInt(this.qtyInstrucciones.getText());
         int prio = Integer.parseInt(this.prioridad.getText());
-        clear();
+        clear(); //OJO
         if("CPU Bound".equals(tipot)){
-            Proceso ele = new Proceso(nombrel,inst,"CPU Bound",prio);
-            CreacionProceso.colaListos.agregar(ele);
+            Proceso elem = new Proceso(nombrel,inst,"CPU Bound",prio);
+            System.out.println("se agrego cpu bound");
+            colaListos.agregar(elem);
         }else if ("I/O Bound".equals(tipot)){
-            Proceso ele = new Proceso(nombrel,inst,"I/O Bound",prio);
-            CreacionProceso.colaListos.agregar(ele);
+            IOBound detalles = new IOBound(this,nombrel,inst,prio);
         }
-        tipot="";
+        tipot="CPU Bound";
     }//GEN-LAST:event_saveActionPerformed
 
     private void qtyInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qtyInstruccionesActionPerformed
@@ -201,6 +208,10 @@ public class CreacionProceso extends javax.swing.JFrame {
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         tipot = tipo.getSelectedItem().toString();
     }//GEN-LAST:event_tipoActionPerformed
+
+    private void prioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prioridadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_prioridadActionPerformed
 
     /**
      * @param args the command line arguments

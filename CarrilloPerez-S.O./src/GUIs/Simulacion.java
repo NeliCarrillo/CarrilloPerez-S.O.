@@ -9,15 +9,19 @@ import static GUIs.CreacionProceso.colaListos;
 import Objetos.Procesador;
 import Objetos.Proceso;
 import Objetos.Semaforo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
  *
  * @author nelsoncarrillo
  */
-public class Simulacion extends javax.swing.JFrame {
+public final class Simulacion extends javax.swing.JFrame {
     
     Cola colaL = colaListos;
+    Cola colaT;
+    Cola colaB;
     Semaforo semf = new Semaforo();
     int cicloreloj;
     Procesador cpu1;
@@ -36,20 +40,33 @@ public class Simulacion extends javax.swing.JFrame {
      */
     public Simulacion() {
         initComponents();
+        actualizarListos();
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
         this.terminados.setEditable(false);
         this.procesador1.setEditable(false);
-        actualizarListos();
         cargarProcesadores();
+        this.colaT = new Cola();
+        this.colaB = new Cola();
     }
     
     Simulacion instancia = this;
 
 
     public void actualizarListos(){
-        this.listos.setText(colaL.print());
+        listos.setText(colaL.print());
     }
+    
+    public void actualizarTerminados(Proceso t){
+        colaT.agregar(t);
+        terminados.setText(colaT.print());
+    }
+    
+    public void actualizarBloqueados(Proceso t){
+        colaB.agregar(t);
+        bloqueados.setText(colaB.print());
+    }
+    
     
     public void actualizarCiclo(){
         cpu1.setCicloReloj(cicloreloj);
