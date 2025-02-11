@@ -15,6 +15,7 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     
     static Cola colaListos = new Cola();
+    private String tipot="";
 
     
     /**
@@ -29,7 +30,6 @@ public class CreacionProceso extends javax.swing.JFrame {
         this.nombre.setText("");
         this.prioridad.setText("");
         this.qtyInstrucciones.setText("");
-        this.tipo.setSelectedIndex(0);
     }
 
     
@@ -48,11 +48,11 @@ public class CreacionProceso extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         qtyInstrucciones = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tipo = new javax.swing.JComboBox<>();
         save = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         prioridad = new javax.swing.JTextField();
         Finalizar = new javax.swing.JButton();
+        tipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,13 +77,6 @@ public class CreacionProceso extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel3.setText("Tipo de Proceso:");
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "I/O Bound", "CPU Bound", " " }));
-        tipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoActionPerformed(evt);
-            }
-        });
-
         save.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         save.setText("Añadir");
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +92,13 @@ public class CreacionProceso extends javax.swing.JFrame {
         Finalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FinalizarActionPerformed(evt);
+            }
+        });
+
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPU Bound", "I/O Bound" }));
+        tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoActionPerformed(evt);
             }
         });
 
@@ -120,8 +120,8 @@ public class CreacionProceso extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(qtyInstrucciones)
-                            .addComponent(tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(prioridad))))
+                            .addComponent(prioridad)
+                            .addComponent(tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(33, 33, 33)
                 .addComponent(Finalizar)
                 .addGap(21, 21, 21))
@@ -141,11 +141,11 @@ public class CreacionProceso extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save)
                     .addComponent(Finalizar))
@@ -171,18 +171,20 @@ public class CreacionProceso extends javax.swing.JFrame {
         
     }//GEN-LAST:event_nombreActionPerformed
 
-    private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipoActionPerformed
-
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
         String nombrel = nombre.getText();
         int inst = Integer.parseInt(this.qtyInstrucciones.getText());
         int prio = Integer.parseInt(this.prioridad.getText());
         clear();
-        Proceso ele = new Proceso(nombrel,inst,"ol",prio);
-        CreacionProceso.colaListos.agregar(ele);
+        if("CPU Bound".equals(tipot)){
+            Proceso ele = new Proceso(nombrel,inst,"CPU Bound",prio);
+            CreacionProceso.colaListos.agregar(ele);
+        }else if ("I/O Bound".equals(tipot)){
+            Proceso ele = new Proceso(nombrel,inst,"I/O Bound",prio);
+            CreacionProceso.colaListos.agregar(ele);
+        }
+        tipot="";
     }//GEN-LAST:event_saveActionPerformed
 
     private void qtyInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qtyInstruccionesActionPerformed
@@ -195,6 +197,10 @@ public class CreacionProceso extends javax.swing.JFrame {
         sim.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FinalizarActionPerformed
+
+    private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
+        tipot = tipo.getSelectedItem().toString();
+    }//GEN-LAST:event_tipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,10 +230,8 @@ public class CreacionProceso extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreacionProceso().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new CreacionProceso().setVisible(true);
         });
     }
 
@@ -242,6 +246,6 @@ public class CreacionProceso extends javax.swing.JFrame {
     private javax.swing.JTextField prioridad;
     private javax.swing.JTextField qtyInstrucciones;
     private javax.swing.JButton save;
-    public javax.swing.JComboBox<String> tipo;
+    private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }
