@@ -68,4 +68,8 @@ public class Cola {
         return resultado; // Devolver el resultado como un String
     }
     
+    public Nodo getTop(){
+        return this.frente;
+    }
+    
 }

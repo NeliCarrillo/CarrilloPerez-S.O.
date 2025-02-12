@@ -6,6 +6,7 @@ package GUIs;
 
 import EDD.Cola;
 import static GUIs.CreacionProceso.colaListos;
+import Objetos.BIOS;
 import Objetos.Procesador;
 import Objetos.Proceso;
 import Objetos.Semaforo;
@@ -26,6 +27,8 @@ public final class Simulacion extends javax.swing.JFrame {
     int cicloreloj;
     Procesador cpu1;
     Procesador cpu2;
+    Procesador cpu3;
+    BIOS bios;
 
     public int getCicloreloj() {
         return cicloreloj;
@@ -57,6 +60,12 @@ public final class Simulacion extends javax.swing.JFrame {
         listos.setText(colaL.print());
     }
     
+    public void aggListos(Proceso p){
+        colaL.agregar(p);
+        listos.setText(colaL.print());
+                bloqueados.setText(colaB.print());
+    }
+    
     public void actualizarTerminados(Proceso t){
         colaT.agregar(t);
         terminados.setText(colaT.print());
@@ -65,6 +74,10 @@ public final class Simulacion extends javax.swing.JFrame {
     public void actualizarBloqueados(Proceso t){
         colaB.agregar(t);
         bloqueados.setText(colaB.print());
+    }
+    
+    public Cola getBloqueados(){
+        return colaB;
     }
     
     
@@ -78,6 +91,8 @@ public final class Simulacion extends javax.swing.JFrame {
         cpu1.start();
         cpu2 = new Procesador(2,colaL,semf,4000,this);
         cpu2.start();
+        this.bios=new BIOS(this);
+        bios.start();
     }
     
     public Simulacion getInstancia() {
@@ -101,6 +116,10 @@ public final class Simulacion extends javax.swing.JFrame {
         }
         
     }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
