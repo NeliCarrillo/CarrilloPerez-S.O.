@@ -63,7 +63,7 @@ public final class Simulacion extends javax.swing.JFrame {
     public void aggListos(Proceso p){
         colaL.agregar(p);
         listos.setText(colaL.print());
-                bloqueados.setText(colaB.print());
+        bloqueados.setText(colaB.print());
     }
     
     public void actualizarTerminados(Proceso t){

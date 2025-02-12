@@ -38,16 +38,33 @@ public class BIOS extends Thread{
         }
     }
     
-    private void checkIO(){
+    private void checkIO() {
         Cola colaB = sim.getBloqueados();
         Nodo actual = colaB.getTop();
-        while(actual != null){
+        Nodo anterior = null;
+
+        while (actual != null) {
             Proceso p = actual.getElemento();
             p.sumarCicloBloqueado();
-            if(p.finalizadaES()){
+
+            if (p.finalizadaES()) {
+                
+                // Eliminar el nodo de la cola
+                if (anterior == null) {
+                    // Si es el primer nodo, actualizamos la cabeza de la cola
+                    colaB.setFrente(actual.getSiguiente());
+                } else {
+                    // Si no es el primer nodo, enlazamos el nodo anterior con el siguiente
+                    anterior.setSiguiente(actual.getSiguiente());
+                }
+                // Actualizamos el nodo actual para continuar el ciclo
                 this.sim.aggListos(p);
+                actual = actual.getSiguiente();
+            } else {
+                // Solo avanzamos si no eliminamos el nodo
+                anterior = actual;
+                actual = actual.getSiguiente();
             }
-            actual = actual.getSiguiente();
         }
     }
     

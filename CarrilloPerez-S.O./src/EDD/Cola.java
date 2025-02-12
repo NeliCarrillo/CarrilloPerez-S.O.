@@ -71,5 +71,9 @@ public class Cola {
     public Nodo getTop(){
         return this.frente;
     }
+
+    public void setFrente(Nodo frente) {
+        this.frente = frente;
+    }
     
 }
