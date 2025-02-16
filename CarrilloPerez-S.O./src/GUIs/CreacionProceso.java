@@ -23,7 +23,7 @@ public class CreacionProceso extends javax.swing.JFrame {
      */
     public CreacionProceso() {
         initComponents();
-        setVisible(true);
+        this.setVisible(true);
     }
     
     

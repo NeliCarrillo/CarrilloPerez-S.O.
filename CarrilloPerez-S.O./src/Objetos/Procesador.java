@@ -1,6 +1,8 @@
 package Objetos;
 import EDD.Cola;
 import GUIs.Simulacion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -81,6 +83,7 @@ public class Procesador extends Thread {
             }
         }else{
             if(!proceso.desbloqueada()){
+                proceso.setIdProcesador(this.id);
                 System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
                 while (proceso.NoHaSucedidoInterrupcion()) {
                     try {

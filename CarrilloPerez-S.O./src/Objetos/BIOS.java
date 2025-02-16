@@ -62,6 +62,7 @@ public class BIOS extends Thread{
                 p.setEstado("Ready");
                 this.sim.aggListos(p);
                 actual = actual.getSiguiente();
+                
             } else {
                 // Solo avanzamos si no eliminamos el nodo
                 anterior = actual;

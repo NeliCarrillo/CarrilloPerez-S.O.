@@ -4,6 +4,7 @@ package Objetos;
 public class Proceso{
     private static int contadorID = 0; // Generador de IDs únicos
     private int id;
+    private int idProcesador;
     private String nombre;
     private int numeroInstruccionesRestantes;
     private int numerototalInstrucciones;
@@ -49,6 +50,14 @@ public class Proceso{
     // Getters y Setters
     public int getId() {
         return id;
+    }
+
+    public int getIdProcesador() {
+        return idProcesador;
+    }
+
+    public void setIdProcesador(int idProcesador) {
+        this.idProcesador = idProcesador;
     }
 
     public String getNombre() {
