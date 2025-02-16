@@ -88,6 +88,7 @@ public final class Simulacion extends javax.swing.JFrame {
     public void actualizarCiclo(){
         cpu1.setCicloReloj(cicloreloj);
         cpu2.setCicloReloj(cicloreloj);
+        cpu3.setCicloReloj(cicloreloj);
     }
     
     private void cargarProcesadores(){
@@ -95,6 +96,8 @@ public final class Simulacion extends javax.swing.JFrame {
         cpu1.start();
         cpu2 = new Procesador(2,colaL,semf,4000,this);
         cpu2.start();
+        cpu3 = new Procesador(3,colaL,semf,4000,this);
+        cpu3.start();
         this.bios=new BIOS(this);
         bios.start();
     }

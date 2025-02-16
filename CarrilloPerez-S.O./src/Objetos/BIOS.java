@@ -59,6 +59,7 @@ public class BIOS extends Thread{
                     anterior.setSiguiente(actual.getSiguiente());
                 }
                 // Actualizamos el nodo actual para continuar el ciclo
+                p.setEstado("Ready");
                 this.sim.aggListos(p);
                 actual = actual.getSiguiente();
             } else {
