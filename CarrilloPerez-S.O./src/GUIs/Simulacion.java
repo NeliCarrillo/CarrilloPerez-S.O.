@@ -38,6 +38,10 @@ public final class Simulacion extends javax.swing.JFrame {
         this.cicloreloj = cicloreloj;
     }
     
+    public void sumReloj(int i){
+        this.reloj.setText("Ciclos Completos: "+i);
+    }
+    
     /**
      * Creates new form Simulacion
      */
@@ -155,6 +159,7 @@ public final class Simulacion extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        reloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -269,6 +274,8 @@ public final class Simulacion extends javax.swing.JFrame {
 
         jLabel8.setText("Número de Ciclo:");
 
+        reloj.setText("Ciclos Completos: 0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -289,15 +296,20 @@ public final class Simulacion extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel8))
-                        .addGap(102, 102, 102)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel8))
+                                .addGap(102, 102, 102))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(reloj)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
@@ -333,7 +345,9 @@ public final class Simulacion extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
+                                .addComponent(jButton2)
+                                .addGap(32, 32, 32)
+                                .addComponent(reloj)))
                         .addGap(178, 178, 178))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -441,6 +455,7 @@ public final class Simulacion extends javax.swing.JFrame {
     private javax.swing.JTextArea procesador1;
     private javax.swing.JTextArea procesador2;
     private javax.swing.JTextArea procesador3;
+    private javax.swing.JLabel reloj;
     private javax.swing.JTextArea terminados;
     // End of variables declaration//GEN-END:variables
 }

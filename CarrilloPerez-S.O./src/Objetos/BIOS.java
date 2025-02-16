@@ -30,6 +30,7 @@ public class BIOS extends Thread{
             try {
                     Thread.sleep(cicloReloj);
                     ciclos++;
+                    this.sim.sumReloj(ciclos);
                     System.out.println(ciclos);
                     checkIO();
             } catch (InterruptedException e) {
