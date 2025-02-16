@@ -10,7 +10,7 @@ import GUIs.Simulacion;
 import static Objetos.Procesador.cicloReloj;
 
 /**
- *
+ *hola 
  * @author nelsoncarrillo
  */
 public class BIOS extends Thread{
