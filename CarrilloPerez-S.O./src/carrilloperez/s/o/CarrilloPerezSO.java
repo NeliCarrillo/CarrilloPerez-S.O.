@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package carrilloperez.s.o;
-
+import GUIs.CreacionProceso;
 /**
  *
  * @author nelsoncarrillo
@@ -15,6 +15,7 @@ public class CarrilloPerezSO {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        CreacionProceso inicio = new CreacionProceso();
     }
     
 }
