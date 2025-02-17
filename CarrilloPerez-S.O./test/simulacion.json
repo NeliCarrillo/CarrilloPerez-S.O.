@@ -1,3 +1,87 @@
 {
-  "contador": 1
+  "semaforo": {
+    "contador": 1
+  },
+  "colaL": {
+    "frente": {
+      "elemento": {
+        "id": 4,
+        "idProcesador": 0,
+        "nombre": "65",
+        "numeroInstruccionesRestantes": 54,
+        "numerototalInstrucciones": 0,
+        "ciclosParaGenerarExcepcion": 0,
+        "ciclosParaSatisfacerExcepcion": 0,
+        "tipo": "CPU Bound",
+        "prioridad": 4,
+        "estado": "Ready",
+        "PC": 1,
+        "MAR": 0,
+        "EScompletada": false,
+        "ciclosBloqueado": 0
+      },
+      "siguiente": {
+        "elemento": {
+          "id": 5,
+          "idProcesador": 0,
+          "nombre": "34",
+          "numeroInstruccionesRestantes": 6,
+          "numerototalInstrucciones": 0,
+          "ciclosParaGenerarExcepcion": 0,
+          "ciclosParaSatisfacerExcepcion": 0,
+          "tipo": "CPU Bound",
+          "prioridad": 7,
+          "estado": "Ready",
+          "PC": 1,
+          "MAR": 0,
+          "EScompletada": false,
+          "ciclosBloqueado": 0
+        },
+        "siguiente": {
+          "elemento": {
+            "id": 6,
+            "idProcesador": 0,
+            "nombre": "56",
+            "numeroInstruccionesRestantes": 87,
+            "numerototalInstrucciones": 0,
+            "ciclosParaGenerarExcepcion": 0,
+            "ciclosParaSatisfacerExcepcion": 0,
+            "tipo": "CPU Bound",
+            "prioridad": 54,
+            "estado": "Ready",
+            "PC": 1,
+            "MAR": 0,
+            "EScompletada": false,
+            "ciclosBloqueado": 0
+          }
+        }
+      }
+    },
+    "fin": {
+      "elemento": {
+        "id": 6,
+        "idProcesador": 0,
+        "nombre": "56",
+        "numeroInstruccionesRestantes": 87,
+        "numerototalInstrucciones": 0,
+        "ciclosParaGenerarExcepcion": 0,
+        "ciclosParaSatisfacerExcepcion": 0,
+        "tipo": "CPU Bound",
+        "prioridad": 54,
+        "estado": "Ready",
+        "PC": 1,
+        "MAR": 0,
+        "EScompletada": false,
+        "ciclosBloqueado": 0
+      }
+    },
+    "tamaño": 3
+  },
+  "colaT": {
+    "tamaño": 0
+  },
+  "colaB": {
+    "tamaño": 0
+  },
+  "cicloReloj": 4000
 }

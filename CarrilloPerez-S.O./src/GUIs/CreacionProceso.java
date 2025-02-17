@@ -16,12 +16,20 @@ public class CreacionProceso extends javax.swing.JFrame {
     
     static Cola colaListos = new Cola();
     private String tipot="CPU Bound";
+    private int numProcesadores;
 
     
     /**
      * Creates new form CreacionProceso
      */
     public CreacionProceso() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+    }
+
+    public CreacionProceso(NumProcesadores neu) {
+        this.numProcesadores=neu.getCPU();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -202,6 +210,7 @@ public class CreacionProceso extends javax.swing.JFrame {
     private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
         // TODO add your handling code here:
         Simulacion sim = new Simulacion();
+        sim.setnNumCpu(this.numProcesadores);
         sim.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FinalizarActionPerformed

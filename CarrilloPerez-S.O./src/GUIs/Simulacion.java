@@ -6,6 +6,7 @@ package GUIs;
 import EDD.Cola;
 import static GUIs.CreacionProceso.colaListos;
 import Objetos.BIOS;
+import Objetos.EstadoSimulacion;
 import Objetos.Procesador;
 import Objetos.Proceso;
 import Objetos.Semaforo;
@@ -28,10 +29,12 @@ public final class Simulacion extends javax.swing.JFrame {
     Cola colaB;
     Semaforo semf = new Semaforo();
     int cicloreloj;
-    transient Procesador cpu1;
-    transient Procesador cpu2;
-    transient Procesador cpu3;
-    transient BIOS bios;
+    Procesador cpu1;
+    Procesador cpu2;
+    Procesador cpu3;
+    BIOS bios;
+    int numcpu;
+    
 
     public int getCicloreloj() {
         return cicloreloj;
@@ -65,6 +68,10 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     Simulacion instancia = this;
+    
+    public void setnNumCpu(int ii){
+        this.numcpu=ii;
+    }
 
 
     public void actualizarListos(){
@@ -118,14 +125,22 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     private void cargarProcesadores(){
-        cpu1 = new Procesador(1,colaL,semf,4000,this);
-        cpu1.start();
-        cpu2 = new Procesador(2,colaL,semf,4000,this);
-        cpu2.start();
-        cpu3 = new Procesador(3,colaL,semf,4000,this);
-        cpu3.start();
+        if(this.numcpu==3){
+            cpu1 = new Procesador(1,colaL,semf,4000,this);
+            cpu1.start();
+            cpu2 = new Procesador(2,colaL,semf,4000,this);
+            cpu2.start();
+            cpu3 = new Procesador(3,colaL,semf,4000,this);
+            cpu3.start();
+        }else{
+            cpu1 = new Procesador(1,colaL,semf,4000,this);
+            cpu1.start();
+            cpu2 = new Procesador(2,colaL,semf,4000,this);
+            cpu2.start();
+        }
         this.bios=new BIOS(this);
         bios.start();
+        this.cicloreloj=4000;
     }
     
     public Simulacion getInstancia() {
@@ -160,10 +175,12 @@ public final class Simulacion extends javax.swing.JFrame {
     public void guardarEstado(String rutaArchivo) {
         detenerHilos(); // Detener los hilos antes de guardar
 
+        EstadoSimulacion estado = new EstadoSimulacion(semf, colaL, colaT, colaB, cicloreloj);
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try (FileWriter writer = new FileWriter(rutaArchivo)) {
-            gson.toJson(this.semf, writer);
+            gson.toJson(estado, writer); // Serializar el objeto contenedor
             System.out.println("Estado de la simulación guardado en: " + rutaArchivo);
         } catch (IOException e) {
             e.printStackTrace();
