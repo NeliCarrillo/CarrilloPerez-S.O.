@@ -23,7 +23,8 @@ public class CreacionProceso extends javax.swing.JFrame {
      */
     public CreacionProceso() {
         initComponents();
-        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
     
     

@@ -135,7 +135,7 @@ public class Procesador extends Thread {
     
     private void manejarInterrupcion() {
         System.out.println("Procesador " + id + " manejando interrupción...");
-        this.simulacion.getInstancia().actualizarTextoArea("S.O. Interrupción manejada por el procesador " + id, this.id);
+        this.simulacion.getInstancia().actualizarTextoArea("Interrupción manejada por el S.O en el procesador " + id, this.id);
 
         try {
             Thread.sleep(cicloReloj); // Simular el tiempo de manejo de la interrupción
