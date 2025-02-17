@@ -46,7 +46,11 @@ public class BIOS extends Thread{
 
         while (actual != null) {
             Proceso p = actual.getElemento();
+            if(p.irInterrumpiendo()){
+                    this.sim.irInterrumpiendo(p);
+            }
             p.sumarCicloBloqueado();
+            
 
             if (p.finalizadaES()) {
                 
@@ -65,12 +69,11 @@ public class BIOS extends Thread{
                 
             } else {
                 // Solo avanzamos si no eliminamos el nodo
-                if(p.irInterrumpiendo()){
-                    this.sim.irInterrumpiendo(p);
-                }
+                
                 anterior = actual;
                 actual = actual.getSiguiente();
             }
+            
         }
     }
     
