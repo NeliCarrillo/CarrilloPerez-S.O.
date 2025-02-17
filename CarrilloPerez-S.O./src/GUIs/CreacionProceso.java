@@ -28,8 +28,8 @@ public class CreacionProceso extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public CreacionProceso(NumProcesadores neu) {
-        this.numProcesadores=neu.getCPU();
+    public CreacionProceso(int neu) {
+        this.numProcesadores=neu;
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -209,8 +209,7 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
         // TODO add your handling code here:
-        Simulacion sim = new Simulacion();
-        sim.setnNumCpu(this.numProcesadores);
+        Simulacion sim = new Simulacion(this.numProcesadores);
         sim.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FinalizarActionPerformed

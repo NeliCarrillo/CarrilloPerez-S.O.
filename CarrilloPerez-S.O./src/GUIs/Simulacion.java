@@ -34,6 +34,10 @@ public final class Simulacion extends javax.swing.JFrame {
     Procesador cpu3;
     BIOS bios;
     int numcpu;
+
+    private Simulacion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 
     public int getCicloreloj() {
@@ -51,10 +55,11 @@ public final class Simulacion extends javax.swing.JFrame {
     /**
      * Creates new form Simulacion
      */
-    public Simulacion() {
+    public Simulacion(int i) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.numcpu=i;
         actualizarListos();
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
@@ -125,6 +130,7 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     private void cargarProcesadores(){
+        System.out.println(numcpu);
         if(this.numcpu==3){
             cpu1 = new Procesador(1,colaL,semf,4000,this);
             cpu1.start();
@@ -132,7 +138,7 @@ public final class Simulacion extends javax.swing.JFrame {
             cpu2.start();
             cpu3 = new Procesador(3,colaL,semf,4000,this);
             cpu3.start();
-        }else{
+        }else if (this.numcpu==2){
             cpu1 = new Procesador(1,colaL,semf,4000,this);
             cpu1.start();
             cpu2 = new Procesador(2,colaL,semf,4000,this);
@@ -175,7 +181,7 @@ public final class Simulacion extends javax.swing.JFrame {
     public void guardarEstado(String rutaArchivo) {
         detenerHilos(); // Detener los hilos antes de guardar
 
-        EstadoSimulacion estado = new EstadoSimulacion(semf, colaL, colaT, colaB, cicloreloj);
+        EstadoSimulacion estado = new EstadoSimulacion(this.semf, this.colaL, this.colaT, this.colaB, this.cicloreloj,this.numcpu);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
