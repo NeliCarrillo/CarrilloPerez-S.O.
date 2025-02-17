@@ -50,11 +50,11 @@ public class Load extends javax.swing.JFrame {
                 loadTXTActionPerformed(evt);
             }
         });
-        getContentPane().add(loadTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 275, 44));
+        getContentPane().add(loadTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 310, 44));
 
         loadP.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         loadP.setText("Cargar Nuevos Procesos a los Guardados");
-        getContentPane().add(loadP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 45));
+        getContentPane().add(loadP, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 310, 45));
 
         jButton1.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jButton1.setText("Iniciar con Nuevos Procesos");
@@ -63,7 +63,7 @@ public class Load extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 275, 45));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 270, 300, 45));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
