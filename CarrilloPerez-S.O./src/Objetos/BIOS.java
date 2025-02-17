@@ -65,6 +65,9 @@ public class BIOS extends Thread{
                 
             } else {
                 // Solo avanzamos si no eliminamos el nodo
+                if(p.irInterrumpiendo()){
+                    this.sim.irInterrumpiendo(p);
+                }
                 anterior = actual;
                 actual = actual.getSiguiente();
             }

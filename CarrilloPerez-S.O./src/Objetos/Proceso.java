@@ -51,6 +51,10 @@ public class Proceso{
     public int getId() {
         return id;
     }
+    
+    public boolean irInterrumpiendo(){
+        return(this.ciclosParaSatisfacerExcepcion-this.ciclosBloqueado==1 );
+    }
 
     public int getIdProcesador() {
         return idProcesador;

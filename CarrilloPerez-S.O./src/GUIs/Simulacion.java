@@ -70,6 +70,25 @@ public final class Simulacion extends javax.swing.JFrame {
         bloqueados.setText(colaB.print());
     }
     
+    public void irInterrumpiendo(Proceso p){
+        switch (p.getIdProcesador()) {
+            case 1:
+                cpu1.interrumpir();
+                System.out.println("procesador 1 notificado salida");
+                break;
+            case 2:
+                cpu2.interrumpir();
+                System.out.println("procesador 2 notificado salida");
+                break;
+            case 3:
+                cpu3.interrumpir();
+                System.out.println("procesador 3 notificado salida");
+                break;
+            default:
+                break;
+        }
+    }
+    
     public void actualizarTerminados(Proceso t){
         colaT.agregar(t);
         terminados.setText(colaT.print());

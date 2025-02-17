@@ -17,6 +17,7 @@ public class Procesador extends Thread {
     private int ciclosEjecutados; // Contador de ciclos ejecutados por este procesador
     static int cicloReloj; // Duración del ciclo de reloj en milisegundos
     private Simulacion simulacion;
+    private boolean interrupcionPendiente=false;
 
     public Procesador(int id, Cola colaListos, Semaforo semaforo, int cicloReloj,Simulacion simulacion) {
         this.id = id;
@@ -54,12 +55,16 @@ public class Procesador extends Thread {
             }
         }
     }
+    
+    
 
     private void ejecutarProceso(Proceso proceso) {
         if("CPU Bound".equals(proceso.getTipo())||proceso.desbloqueada()){
             System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
             while (proceso.getNumeroInstrucciones() > 0) {
                 try {
+                    if (interrupcionPendiente) 
+                        manejarInterrupcion();
                     this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+", STATUS: "+this.procesoActual.getEstado()+", Nombre: "+this.procesoActual.getNombre()+", PC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
                     Thread.sleep(cicloReloj); // Simular la ejecución de una instrucción (ajustado al ciclo de reloj)
                     proceso.setNumeroInstrucciones(proceso.getNumeroInstrucciones()-1);
@@ -127,9 +132,27 @@ public class Procesador extends Thread {
     public int getCicloReloj() {
         return cicloReloj;
     }
+    
+    private void manejarInterrupcion() {
+        System.out.println("Procesador " + id + " manejando interrupción...");
+        this.simulacion.getInstancia().actualizarTextoArea("S.O. Interrupción manejada por el procesador " + id, this.id);
 
+        try {
+            Thread.sleep(cicloReloj); // Simular el tiempo de manejo de la interrupción
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        interrupcionPendiente = false; // Reiniciar la bandera de interrupción
+    }
+    
+    public void interrumpir(){
+        this.interrupcionPendiente=true;
+    }
+    
     public synchronized void setCicloReloj(int cicloReloj) {
         this.cicloReloj = cicloReloj; // Permitir cambiar el ciclo de reloj dinámicamente
         System.out.println("Procesador " + id + ": Ciclo de reloj actualizado a " + cicloReloj + " ms.");
     }
+       
 }
