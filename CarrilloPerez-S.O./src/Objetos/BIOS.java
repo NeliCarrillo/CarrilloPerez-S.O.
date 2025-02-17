@@ -44,7 +44,7 @@ public class BIOS extends Thread{
         Nodo actual = colaB.getTop();
         Nodo anterior = null;
 
-        while (actual != null) {
+        while (actual != null&&activo) {
             Proceso p = actual.getElemento();
             if(p.irInterrumpiendo()){
                     this.sim.irInterrumpiendo(p);

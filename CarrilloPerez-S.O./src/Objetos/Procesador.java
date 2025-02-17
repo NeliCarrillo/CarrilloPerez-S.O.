@@ -13,7 +13,7 @@ public class Procesador extends Thread {
     private Proceso procesoActual; // Proceso que está ejecutando actualmente
     private Cola colaListos; // Cola de procesos listos compartida
     private Semaforo semaforo; // Semáforo personalizado para garantizar exclusión mutua
-    private boolean activo; // Indica si el procesador está activo
+    private volatile boolean activo; // Indica si el procesador está activo
     private int ciclosEjecutados; // Contador de ciclos ejecutados por este procesador
     static int cicloReloj; // Duración del ciclo de reloj en milisegundos
     private Simulacion simulacion;
@@ -61,7 +61,7 @@ public class Procesador extends Thread {
     private void ejecutarProceso(Proceso proceso) {
         if("CPU Bound".equals(proceso.getTipo())||proceso.desbloqueada()){
             System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
-            while (proceso.getNumeroInstrucciones() > 0) {
+            while (proceso.getNumeroInstrucciones() > 0 && activo) {
                 try {
                     if (interrupcionPendiente) 
                         manejarInterrupcion();
@@ -69,28 +69,29 @@ public class Procesador extends Thread {
                     Thread.sleep(cicloReloj); // Simular la ejecución de una instrucción (ajustado al ciclo de reloj)
                     proceso.setNumeroInstrucciones(proceso.getNumeroInstrucciones()-1);
                     ciclosEjecutados++;
-                    //this.simulacion.cicloCompleto();
                     this.procesoActual.setPC(this.procesoActual.getPC()+1);
                     System.out.println("Procesador " + id + " ejecutó una instrucción. Instrucciones restantes: " + proceso.getNumeroInstrucciones());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
-            this.simulacion.getInstancia().actualizarTextoArea("Procesador tomado por \nel Sistema Operativo...",this.id);
-            procesoActual.setEstado("Finished");
-            this.simulacion.actualizarTerminados(procesoActual);
-            procesoActual = null; // Liberar el procesador
-            try { //este es para que salga la vaina de que el sistema operativo toma el procesador
-                Thread.sleep(cicloReloj); // Pausa de 500 ms para que el mensaje sea visible
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(activo){
+                System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
+                this.simulacion.getInstancia().actualizarTextoArea("Procesador tomado por \nel Sistema Operativo...",this.id);
+                procesoActual.setEstado("Finished");
+                this.simulacion.actualizarTerminados(procesoActual);
+                procesoActual = null; // Liberar el procesador
+                try { //este es para que salga la vaina de que el sistema operativo toma el procesador
+                    Thread.sleep(cicloReloj); // Pausa de 500 ms para que el mensaje sea visible
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }else{
             if(!proceso.desbloqueada()){
                 proceso.setIdProcesador(this.id);
                 System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
-                while (proceso.NoHaSucedidoInterrupcion()) {
+                while (proceso.NoHaSucedidoInterrupcion() && activo) {
                     try {
                         this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+", STATUS: "+this.procesoActual.getEstado()+", Nombre: "+this.procesoActual.getNombre()+", PC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
                         Thread.sleep(cicloReloj); // Simular la ejecución de una instrucción (ajustado al ciclo de reloj)
@@ -102,6 +103,7 @@ public class Procesador extends Thread {
                         e.printStackTrace();
                     }
                 }
+                if(activo){
                 //System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
                 this.simulacion.getInstancia().actualizarTextoArea("Procesador tomado por \nel Sistema Operativo...",this.id);
                 procesoActual.setEstado("Blocked");
@@ -111,7 +113,7 @@ public class Procesador extends Thread {
                     Thread.sleep(cicloReloj); // Pausa de 500 ms para que el mensaje sea visible
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }}
             }
             
         }

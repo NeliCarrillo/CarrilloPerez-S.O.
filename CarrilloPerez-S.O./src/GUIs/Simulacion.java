@@ -3,14 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUIs;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import EDD.Cola;
 import static GUIs.CreacionProceso.colaListos;
 import Objetos.BIOS;
 import Objetos.Procesador;
 import Objetos.Proceso;
 import Objetos.Semaforo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,10 +28,10 @@ public final class Simulacion extends javax.swing.JFrame {
     Cola colaB;
     Semaforo semf = new Semaforo();
     int cicloreloj;
-    Procesador cpu1;
-    Procesador cpu2;
-    Procesador cpu3;
-    BIOS bios;
+    transient Procesador cpu1;
+    transient Procesador cpu2;
+    transient Procesador cpu3;
+    transient BIOS bios;
 
     public int getCicloreloj() {
         return cicloreloj;
@@ -148,6 +150,25 @@ public final class Simulacion extends javax.swing.JFrame {
         
     }
     
+    public void detenerHilos() {
+        if (cpu1 != null) cpu1.detener();
+        if (cpu2 != null) cpu2.detener();
+        if (cpu3 != null) cpu3.detener();
+        if (bios != null) bios.detener();
+    }
+    
+    public void guardarEstado(String rutaArchivo) {
+        detenerHilos(); // Detener los hilos antes de guardar
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try (FileWriter writer = new FileWriter(rutaArchivo)) {
+            gson.toJson(this.semf, writer);
+            System.out.println("Estado de la simulación guardado en: " + rutaArchivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     
     
@@ -332,7 +353,7 @@ public final class Simulacion extends javax.swing.JFrame {
         reloj.setText("Ciclos Completos: 0");
         jPanel1.add(reloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 501, -1, -1));
 
-        exit.setBackground(new java.awt.Color(255, 0, 51));
+        exit.setBackground(new java.awt.Color(153, 0, 0));
         exit.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         exit.setForeground(new java.awt.Color(255, 255, 255));
         exit.setText("X");
@@ -341,7 +362,7 @@ public final class Simulacion extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 80, -1));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -373,7 +394,7 @@ public final class Simulacion extends javax.swing.JFrame {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-        
+        this.guardarEstado("test//simulacion.json");
     }//GEN-LAST:event_exitActionPerformed
 
     /**
