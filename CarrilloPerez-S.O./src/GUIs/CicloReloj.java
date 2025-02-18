@@ -18,6 +18,8 @@ public class CicloReloj extends javax.swing.JFrame {
     public CicloReloj(Simulacion sim) {
         initComponents();        
         sim.setVisible(false);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         setVisible(true);
         this.sim = sim;
     }
