@@ -4,6 +4,7 @@
  */
 package GUIs;
 import EDD.Cola;
+import EDD.Nodo;
 import static GUIs.CreacionProceso.colaListos;
 import Objetos.BIOS;
 import Objetos.EstadoSimulacion;
@@ -141,8 +142,11 @@ public final class Simulacion extends javax.swing.JFrame {
         }
     }
     
-    public synchronized void actualizarTerminados(Proceso tu){
-        this.terminados.setText(this.terminados.getText()+"\n"+tu.print());
+    public void actualizarTerminados(Proceso tu){
+        Cola copia = this.colaT.copiar();
+        copia.agregar(tu);
+        this.terminados.setText(copia.print());
+        this.colaT=copia;
     }
     
     public void actualizarTerminadosR(){
@@ -150,8 +154,10 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     public void actualizarBloqueados(Proceso t){
-        colaB.agregar(t);
-        bloqueados.setText(colaB.print());
+        Cola copia = this.colaB.copiar();
+        copia.agregar(t);
+        this.bloqueados.setText(colaB.print());
+        this.colaB=copia;
     }
     
     public void actualizarBloqueadosR(){

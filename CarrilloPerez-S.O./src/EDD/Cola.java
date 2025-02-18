@@ -20,7 +20,7 @@ public class Cola {
     }
 
     // Método para agregar un elemento a la cola
-    public void agregar(Proceso elemento) {
+    public synchronized void agregar(Proceso elemento) {
         Nodo nuevoNodo = new Nodo(elemento);
         if (estaVacia()) {
             frente = nuevoNodo; // Si la cola está vacía, el nuevo nodo es el frente
@@ -52,17 +52,25 @@ public class Cola {
         return tamaño;
     }
     
+    public Cola copiar(){
+        Cola r = new Cola();
+        Nodo actual = this.frente;
+        while(actual!=null){
+            r.agregar(actual.getElemento());
+            actual=actual.getSiguiente();
+        }
+        return r;
+    }
+    
     public String print() {
         String resultado = ""; // Inicializamos un String vacío
 
         // Usamos un ciclo for para recorrer la cola
         Nodo actual = frente; // Comenzamos desde el nodo frente
-        for (int i = 0; i < tamaño; i++) {
-            if (actual != null) {
+        while(actual!=null) {
                 Proceso proceso = actual.getElemento(); // Obtener el proceso del nodo actual
-                resultado += proceso.print()+"\n\n";
+                resultado += proceso.print()+"\n";
                 actual = actual.getSiguiente(); // Mover al siguiente nodo
-            }
         }
 
         return resultado; // Devolver el resultado como un String
@@ -70,6 +78,10 @@ public class Cola {
     
     public Nodo getTop(){
         return this.frente;
+    }
+    
+    public Nodo getFinal(){
+        return this.fin;
     }
 
     public void setFrente(Nodo frente) {
