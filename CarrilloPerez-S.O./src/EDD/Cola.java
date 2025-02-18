@@ -20,7 +20,7 @@ public class Cola {
     }
 
     // Método para agregar un elemento a la cola
-    public synchronized void agregar(Proceso elemento) {
+    public void agregar(Proceso elemento) {
         Nodo nuevoNodo = new Nodo(elemento);
         if (estaVacia()) {
             frente = nuevoNodo; // Si la cola está vacía, el nuevo nodo es el frente

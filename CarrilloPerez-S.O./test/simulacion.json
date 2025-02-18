@@ -3,86 +3,14 @@
     "contador": 1
   },
   "colaL": {
-    "frente": {
-      "elemento": {
-        "id": 5,
-        "idProcesador": 0,
-        "nombre": "3",
-        "numeroInstruccionesRestantes": 3,
-        "numerototalInstrucciones": 0,
-        "ciclosParaGenerarExcepcion": 0,
-        "ciclosParaSatisfacerExcepcion": 0,
-        "tipo": "CPU Bound",
-        "prioridad": 3,
-        "estado": "Ready",
-        "PC": 1,
-        "MAR": 0,
-        "EScompletada": false,
-        "ciclosBloqueado": 0
-      },
-      "siguiente": {
-        "elemento": {
-          "id": 6,
-          "idProcesador": 0,
-          "nombre": "33",
-          "numeroInstruccionesRestantes": 3,
-          "numerototalInstrucciones": 0,
-          "ciclosParaGenerarExcepcion": 0,
-          "ciclosParaSatisfacerExcepcion": 0,
-          "tipo": "CPU Bound",
-          "prioridad": 3,
-          "estado": "Ready",
-          "PC": 1,
-          "MAR": 0,
-          "EScompletada": false,
-          "ciclosBloqueado": 0
-        },
-        "siguiente": {
-          "elemento": {
-            "id": 7,
-            "idProcesador": 0,
-            "nombre": "3",
-            "numeroInstruccionesRestantes": 3,
-            "numerototalInstrucciones": 0,
-            "ciclosParaGenerarExcepcion": 0,
-            "ciclosParaSatisfacerExcepcion": 0,
-            "tipo": "CPU Bound",
-            "prioridad": 3,
-            "estado": "Ready",
-            "PC": 1,
-            "MAR": 0,
-            "EScompletada": false,
-            "ciclosBloqueado": 0
-          }
-        }
-      }
-    },
-    "fin": {
-      "elemento": {
-        "id": 7,
-        "idProcesador": 0,
-        "nombre": "3",
-        "numeroInstruccionesRestantes": 3,
-        "numerototalInstrucciones": 0,
-        "ciclosParaGenerarExcepcion": 0,
-        "ciclosParaSatisfacerExcepcion": 0,
-        "tipo": "CPU Bound",
-        "prioridad": 3,
-        "estado": "Ready",
-        "PC": 1,
-        "MAR": 0,
-        "EScompletada": false,
-        "ciclosBloqueado": 0
-      }
-    },
-    "tamaño": 3
+    "tamaño": 0
   },
   "colaT": {
     "frente": {
       "elemento": {
         "id": 1,
         "idProcesador": 0,
-        "nombre": "123",
+        "nombre": "2",
         "numeroInstruccionesRestantes": 0,
         "numerototalInstrucciones": 0,
         "ciclosParaGenerarExcepcion": 0,
@@ -99,76 +27,116 @@
         "elemento": {
           "id": 2,
           "idProcesador": 0,
-          "nombre": "2",
+          "nombre": "3",
           "numeroInstruccionesRestantes": 0,
           "numerototalInstrucciones": 0,
           "ciclosParaGenerarExcepcion": 0,
           "ciclosParaSatisfacerExcepcion": 0,
           "tipo": "CPU Bound",
-          "prioridad": 2,
+          "prioridad": 3,
           "estado": "Finished",
-          "PC": 3,
-          "MAR": 2,
+          "PC": 4,
+          "MAR": 3,
           "EScompletada": false,
           "ciclosBloqueado": 0
+        },
+        "siguiente": {
+          "elemento": {
+            "id": 3,
+            "idProcesador": 0,
+            "nombre": "33",
+            "numeroInstruccionesRestantes": 0,
+            "numerototalInstrucciones": 0,
+            "ciclosParaGenerarExcepcion": 0,
+            "ciclosParaSatisfacerExcepcion": 0,
+            "tipo": "CPU Bound",
+            "prioridad": 3,
+            "estado": "Finished",
+            "PC": 4,
+            "MAR": 3,
+            "EScompletada": false,
+            "ciclosBloqueado": 0
+          },
+          "siguiente": {
+            "elemento": {
+              "id": 4,
+              "idProcesador": 0,
+              "nombre": "3",
+              "numeroInstruccionesRestantes": 0,
+              "numerototalInstrucciones": 0,
+              "ciclosParaGenerarExcepcion": 0,
+              "ciclosParaSatisfacerExcepcion": 0,
+              "tipo": "CPU Bound",
+              "prioridad": 3,
+              "estado": "Finished",
+              "PC": 4,
+              "MAR": 3,
+              "EScompletada": false,
+              "ciclosBloqueado": 0
+            },
+            "siguiente": {
+              "elemento": {
+                "id": 5,
+                "idProcesador": 0,
+                "nombre": "3",
+                "numeroInstruccionesRestantes": 0,
+                "numerototalInstrucciones": 0,
+                "ciclosParaGenerarExcepcion": 0,
+                "ciclosParaSatisfacerExcepcion": 0,
+                "tipo": "CPU Bound",
+                "prioridad": 3,
+                "estado": "Finished",
+                "PC": 4,
+                "MAR": 3,
+                "EScompletada": false,
+                "ciclosBloqueado": 0
+              },
+              "siguiente": {
+                "elemento": {
+                  "id": 6,
+                  "idProcesador": 0,
+                  "nombre": "3",
+                  "numeroInstruccionesRestantes": 0,
+                  "numerototalInstrucciones": 0,
+                  "ciclosParaGenerarExcepcion": 0,
+                  "ciclosParaSatisfacerExcepcion": 0,
+                  "tipo": "CPU Bound",
+                  "prioridad": 3,
+                  "estado": "Finished",
+                  "PC": 4,
+                  "MAR": 3,
+                  "EScompletada": false,
+                  "ciclosBloqueado": 0
+                }
+              }
+            }
+          }
         }
       }
     },
     "fin": {
       "elemento": {
-        "id": 2,
+        "id": 6,
         "idProcesador": 0,
-        "nombre": "2",
+        "nombre": "3",
         "numeroInstruccionesRestantes": 0,
         "numerototalInstrucciones": 0,
         "ciclosParaGenerarExcepcion": 0,
         "ciclosParaSatisfacerExcepcion": 0,
         "tipo": "CPU Bound",
-        "prioridad": 2,
+        "prioridad": 3,
         "estado": "Finished",
-        "PC": 3,
-        "MAR": 2,
+        "PC": 4,
+        "MAR": 3,
         "EScompletada": false,
         "ciclosBloqueado": 0
       }
     },
-    "tamaño": 2
+    "tamaño": 6
   },
   "colaB": {
     "tamaño": 0
   },
   "cicloReloj": 0,
-  "numProcesadores": 2,
-  "en1": {
-    "id": 3,
-    "idProcesador": 0,
-    "nombre": "2",
-    "numeroInstruccionesRestantes": 1,
-    "numerototalInstrucciones": 0,
-    "ciclosParaGenerarExcepcion": 0,
-    "ciclosParaSatisfacerExcepcion": 0,
-    "tipo": "CPU Bound",
-    "prioridad": 2,
-    "estado": "Running",
-    "PC": 2,
-    "MAR": 1,
-    "EScompletada": false,
-    "ciclosBloqueado": 0
-  },
-  "en2": {
-    "id": 4,
-    "idProcesador": 0,
-    "nombre": "2",
-    "numeroInstruccionesRestantes": 1,
-    "numerototalInstrucciones": 0,
-    "ciclosParaGenerarExcepcion": 0,
-    "ciclosParaSatisfacerExcepcion": 0,
-    "tipo": "CPU Bound",
-    "prioridad": 2,
-    "estado": "Running",
-    "PC": 2,
-    "MAR": 1,
-    "EScompletada": false,
-    "ciclosBloqueado": 0
-  }
+  "numProcesadores": 2
 }
