@@ -106,6 +106,37 @@ public final class Simulacion extends javax.swing.JFrame {
         cpu2.start();
     }
     
+    public Simulacion(int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Proceso en3, Semaforo semf) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.semf=semf;
+        this.bios= new BIOS(this);
+        this.numcpu=i;
+        this.listos.setEditable(false);
+        this.bloqueados.setEditable(false);
+        this.terminados.setEditable(false);
+        this.procesador1.setEditable(false);
+        this.procesador2.setEditable(false);
+        this.procesador3.setEditable(false);
+        this.colaL=colalistos;
+        this.colaT = colaterm;
+        this.colaB = colabloq;
+        actualizarListos();
+        this.actualizarBloqueadosR();
+        this.actualizarTerminadosR();
+        cpu1 = new Procesador(1,colaL,semf,4000,this);
+        cpu2 = new Procesador(2,colaL,semf,4000,this);
+        cpu3 = new Procesador(3,colaL,semf,4000,this);
+        cpu1.setProcesoActual(en1);
+        cpu2.setProcesoActual(en2);
+        cpu3.setProcesoActual(en3);
+        bios.start();
+        cpu1.start();
+        cpu2.start();
+        cpu3.start();
+    }
+    
     Simulacion instancia = this;
     
     public void setnNumCpu(int ii){
