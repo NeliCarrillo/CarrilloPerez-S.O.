@@ -17,15 +17,22 @@ public class EstadoSimulacion {
     private Cola colaB;
     private int cicloReloj;
     private int numProcesadores;
+    private Proceso en1;
+    private Proceso en2;
+    private Proceso en3;
+    
 
     // Constructor2
-    public EstadoSimulacion(Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n) {
+    public EstadoSimulacion(Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2, Proceso c3) {
         this.semaforo = semaforo;
         this.colaL = colaL;
         this.colaT = colaT;
         this.colaB = colaB;
         this.cicloReloj = cicloReloj;
         this.numProcesadores=n;
+        this.en1=c1;
+        this.en2=c2;
+        this.en3=c3;
     }
 
     // Getters y setters

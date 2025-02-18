@@ -23,6 +23,8 @@ public class IOBound extends javax.swing.JFrame {
     public IOBound(CreacionProceso intey,String name,int instruc,int prio) {
         initComponents();
         setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         inty = intey;
         this.instruc = instruc;
         this.name = name;

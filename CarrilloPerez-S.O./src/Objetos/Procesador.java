@@ -33,6 +33,7 @@ public class Procesador extends Thread {
     public void run() {
         while (activo) {
             try {
+                if(procesoActual==null){
                 // Intentar obtener un proceso de la cola de listos
                 semaforo.adquirir(); // Bloqueo para acceder a la cola de listos
                 if (!colaListos.estaVacia()) {
@@ -41,7 +42,7 @@ public class Procesador extends Thread {
                     this.simulacion.actualizarListos();
                 }
                 semaforo.liberar(); // Liberar el semáforo
-
+                }
                 if (procesoActual != null) {
                     // Simular la ejecución del proceso
                     ejecutarProceso(procesoActual);
@@ -150,6 +151,14 @@ public class Procesador extends Thread {
     
     public void interrumpir(){
         this.interrupcionPendiente=true;
+    }
+
+    public void setProcesoActual(Proceso procesoActual) {
+        this.procesoActual = procesoActual;
+    }
+
+    public Proceso getProcesoActual() {
+        return procesoActual;
     }
     
     public synchronized void setCicloReloj(int cicloReloj) {
