@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Procesador extends Thread {
     private int id; // Identificador único del procesador
     private Proceso procesoActual; // Proceso que está ejecutando actualmente
-    private Cola colaListos; // Cola de procesos listos compartida
+    private final Cola colaListos; // Cola de procesos listos compartida
     private Semaforo semaforo; // Semáforo personalizado para garantizar exclusión mutua
     private volatile boolean activo; // Indica si el procesador está activo
     private int ciclosEjecutados; // Contador de ciclos ejecutados por este procesador
@@ -80,7 +80,7 @@ public class Procesador extends Thread {
                 System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
                 this.simulacion.getInstancia().actualizarTextoArea("Procesador tomado por \nel Sistema Operativo...",this.id);
                 procesoActual.setEstado("Finished");
-                this.simulacion.actualizarTerminados(procesoActual);
+                this.simulacion.actualizarTerminados(this.procesoActual);
                 procesoActual = null; // Liberar el procesador
                 try { //este es para que salga la vaina de que el sistema operativo toma el procesador
                     Thread.sleep(cicloReloj); // Pausa de 500 ms para que el mensaje sea visible

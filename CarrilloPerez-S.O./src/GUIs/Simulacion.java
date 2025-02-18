@@ -141,13 +141,11 @@ public final class Simulacion extends javax.swing.JFrame {
         }
     }
     
-    public void actualizarTerminados(Proceso t){
-        colaT.agregar(t);
-        terminados.setText(colaT.print());
+    public synchronized void actualizarTerminados(Proceso tu){
+        this.terminados.setText(this.terminados.getText()+"\n"+tu.print());
     }
     
     public void actualizarTerminadosR(){
-        //colaT.agregar(t);
         terminados.setText(colaT.print());
     }
     
@@ -157,7 +155,6 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     public void actualizarBloqueadosR(){
-        //colaB.agregar(t);
         bloqueados.setText(colaB.print());
     }
     
