@@ -173,7 +173,7 @@ public final class Simulacion extends javax.swing.JFrame {
         }
     }
     
-    public void actualizarTerminados(Proceso tu){
+    public synchronized void actualizarTerminados(Proceso tu){
         Cola copia = this.colaT.copiar();
         copia.agregar(tu);
         this.terminados.setText(copia.print());
@@ -230,7 +230,7 @@ public final class Simulacion extends javax.swing.JFrame {
         this.cicloreloj=4000;
     }
     
-    public Simulacion getInstancia() {
+    public synchronized Simulacion getInstancia() {
         return instancia;
     }
     

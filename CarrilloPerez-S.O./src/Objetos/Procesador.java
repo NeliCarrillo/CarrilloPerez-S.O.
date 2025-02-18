@@ -157,7 +157,7 @@ public class Procesador extends Thread {
         this.procesoActual = procesoActual;
     }
 
-    public Proceso getProcesoActual() {
+    public synchronized Proceso getProcesoActual() {
         return procesoActual;
     }
     
