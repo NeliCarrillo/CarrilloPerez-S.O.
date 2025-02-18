@@ -4,6 +4,13 @@
  */
 package GUIs;
 
+import EDD.Cola;
+import Objetos.EstadoSimulacion;
+import Objetos.Semaforo;
+import com.google.gson.Gson;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author nelsoncarrillo
@@ -22,6 +29,46 @@ public class Load extends javax.swing.JFrame {
         this.setResizable(false);
         this.creacion=new CreacionProceso();
     }
+    
+    public Simulacion restablecerEstado(String rutaArchivo) {
+        Gson gson = new Gson();
+
+        try (FileReader reader = new FileReader(rutaArchivo)) {
+            // Deserializar el archivo JSON al objeto EstadoSimulacion
+            EstadoSimulacion estado = gson.fromJson(reader, EstadoSimulacion.class);
+
+            // Restaurar los valores en la simulación
+            Semaforo semaf = estado.getSemaforo();
+            Cola colaL = estado.getColaL();
+            Cola colaT = estado.getColaT();
+            Cola colaB = estado.getColaB();
+            int cicloreloj = estado.getCicloReloj();
+            int numcpu = estado.getNumProcesadores();
+            
+            if(numcpu==2){
+                Simulacion sim = new Simulacion(numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),semaf);
+                return sim;
+            }else{
+                Simulacion sim = new Simulacion(numcpu);
+                return sim;
+            }
+
+            
+            /*if (this.numcpu >= 2) {
+                this.cpu1.setProcesoActual(estado.getEn1());
+                this.cpu2.setProcesoActual(estado.getEn2());
+            }
+            if (this.numcpu >= 3) {
+                this.cpu3.setProcesoActual(estado.getEn3());
+            }*/
+            //this.actualizarListos();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,6 +136,10 @@ public class Load extends javax.swing.JFrame {
 
     private void loadTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTXTActionPerformed
         // TODO add your handling code here:
+        Simulacion sim = this.restablecerEstado("test//simulacion.json");
+        //sim.restablecerEstado("test//simulacion.json");
+        sim.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_loadTXTActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

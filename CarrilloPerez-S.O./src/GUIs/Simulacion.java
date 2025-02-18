@@ -12,6 +12,7 @@ import Objetos.Proceso;
 import Objetos.Semaforo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public final class Simulacion extends javax.swing.JFrame {
     Cola colaL = colaListos;
     Cola colaT;
     Cola colaB;
-    Semaforo semf = new Semaforo();
+    Semaforo semf;
     int cicloreloj;
     Procesador cpu1;
     Procesador cpu2;
@@ -54,12 +55,15 @@ public final class Simulacion extends javax.swing.JFrame {
     
     /**
      * Creates new form Simulacion
+     * @param i
      */
     public Simulacion(int i) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.numcpu=i;
+        this.semf= new Semaforo();
+
         actualizarListos();
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
@@ -67,9 +71,38 @@ public final class Simulacion extends javax.swing.JFrame {
         this.procesador1.setEditable(false);
         this.procesador2.setEditable(false);
         this.procesador3.setEditable(false);
+
         cargarProcesadores();
         this.colaT = new Cola();
         this.colaB = new Cola();
+    }
+    
+    public Simulacion(int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.semf=semf;
+        this.bios= new BIOS(this);
+        this.numcpu=i;
+        this.listos.setEditable(false);
+        this.bloqueados.setEditable(false);
+        this.terminados.setEditable(false);
+        this.procesador1.setEditable(false);
+        this.procesador2.setEditable(false);
+        this.procesador3.setEditable(false);
+        this.colaL=colalistos;
+        this.colaT = colaterm;
+        this.colaB = colabloq;
+        actualizarListos();
+        this.actualizarBloqueadosR();
+        this.actualizarTerminadosR();
+        cpu1 = new Procesador(1,colaL,semf,4000,this);
+        cpu2 = new Procesador(2,colaL,semf,4000,this);
+        cpu1.setProcesoActual(en1);
+        cpu2.setProcesoActual(en2);
+        bios.start();
+        cpu1.start();
+        cpu2.start();
     }
     
     Simulacion instancia = this;
@@ -113,8 +146,18 @@ public final class Simulacion extends javax.swing.JFrame {
         terminados.setText(colaT.print());
     }
     
+    public void actualizarTerminadosR(){
+        //colaT.agregar(t);
+        terminados.setText(colaT.print());
+    }
+    
     public void actualizarBloqueados(Proceso t){
         colaB.agregar(t);
+        bloqueados.setText(colaB.print());
+    }
+    
+    public void actualizarBloqueadosR(){
+        //colaB.agregar(t);
         bloqueados.setText(colaB.print());
     }
     
@@ -124,9 +167,13 @@ public final class Simulacion extends javax.swing.JFrame {
     
     
     public void actualizarCiclo(){
+        if(this.numcpu>=2){
         cpu1.setCicloReloj(cicloreloj);
         cpu2.setCicloReloj(cicloreloj);
+        }
+        if(this.numcpu==3){
         cpu3.setCicloReloj(cicloreloj);
+        }
     }
     
     private void cargarProcesadores(){
@@ -196,8 +243,24 @@ public final class Simulacion extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        }else{
+            Proceso p1 = cpu1.getProcesoActual();
+        Proceso p2 = cpu2.getProcesoActual();
+        
+        EstadoSimulacion estado = new EstadoSimulacion(this.semf, this.colaL, this.colaT, this.colaB, this.cicloreloj,this.numcpu,p1,p2);
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try (FileWriter writer = new FileWriter(rutaArchivo)) {
+            gson.toJson(estado, writer); // Serializar el objeto contenedor
+            System.out.println("Estado de la simulación guardado en: " + rutaArchivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         }
     }
+    
+    
     
     
     
@@ -379,6 +442,8 @@ public final class Simulacion extends javax.swing.JFrame {
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         this.guardarEstado("test//simulacion.json");
+        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
 
     /**

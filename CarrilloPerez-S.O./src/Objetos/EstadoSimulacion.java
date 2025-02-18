@@ -34,6 +34,17 @@ public class EstadoSimulacion {
         this.en2=c2;
         this.en3=c3;
     }
+    
+    public EstadoSimulacion(Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2) {
+        this.semaforo = semaforo;
+        this.colaL = colaL;
+        this.colaT = colaT;
+        this.colaB = colaB;
+        this.cicloReloj = cicloReloj;
+        this.numProcesadores=n;
+        this.en1=c1;
+        this.en2=c2;
+    }
 
     // Getters y setters
     public Semaforo getSemaforo() {
@@ -83,6 +94,32 @@ public class EstadoSimulacion {
     public void setNumProcesadores(int numProcesadores) {
         this.numProcesadores = numProcesadores;
     }
+
+    public Proceso getEn1() {
+        return en1;
+    }
+
+    public void setEn1(Proceso en1) {
+        this.en1 = en1;
+    }
+
+    public Proceso getEn2() {
+        return en2;
+    }
+
+    public void setEn2(Proceso en2) {
+        this.en2 = en2;
+    }
+
+    public Proceso getEn3() {
+        return en3;
+    }
+
+    public void setEn3(Proceso en3) {
+        this.en3 = en3;
+    }
+    
+    
     
     
 }
