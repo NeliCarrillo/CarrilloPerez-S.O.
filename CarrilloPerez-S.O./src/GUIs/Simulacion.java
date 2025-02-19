@@ -36,11 +36,19 @@ public final class Simulacion extends javax.swing.JFrame {
     Procesador cpu3;
     BIOS bios;
     int numcpu;
+    String politica;
 
     private Simulacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    public String getPolitica() {
+        return politica;
+    }
+
+    public void setPolitica(String politica) {
+        this.politica = politica;
+    }
 
     public int getCicloreloj() {
         return cicloreloj;
