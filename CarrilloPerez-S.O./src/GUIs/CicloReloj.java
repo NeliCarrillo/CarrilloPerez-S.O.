@@ -66,21 +66,23 @@ public class CicloReloj extends javax.swing.JFrame {
         jLabel2.setText("millis");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 101, -1, -1));
 
-        save.setText("Guardar");
+        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/save-file-2.png"))); // NOI18N
+        save.setContentAreaFilled(false);
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
             }
         });
-        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 164, -1, -1));
+        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
-        back.setText("Cancelar");
+        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/Back-2.png"))); // NOI18N
+        back.setContentAreaFilled(false);
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 164, -1, -1));
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/background.jpg"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
@@ -89,7 +91,7 @@ public class CicloReloj extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
