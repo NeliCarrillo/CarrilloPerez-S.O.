@@ -11,21 +11,21 @@
   "colaB": {
     "tamaño": 0
   },
-  "cicloReloj": 100,
+  "cicloReloj": 500,
   "numProcesadores": 2,
   "en1": {
     "id": 1,
     "idProcesador": 0,
     "nombre": "3",
-    "numeroInstruccionesRestantes": 123286,
+    "numeroInstruccionesRestantes": 123051,
     "numerototalInstrucciones": 0,
     "ciclosParaGenerarExcepcion": 0,
     "ciclosParaSatisfacerExcepcion": 0,
     "tipo": "CPU Bound",
     "prioridad": 1,
     "estado": "Running",
-    "PC": 26,
-    "MAR": 25,
+    "PC": 261,
+    "MAR": 260,
     "EScompletada": false,
     "ciclosBloqueado": 0
   }

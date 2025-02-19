@@ -335,6 +335,7 @@ public final class Simulacion extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         reloj = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -358,12 +359,15 @@ public final class Simulacion extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 436, 293, 150));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cola Procesos Listos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 52, -1, -1));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cola Procesos Bloqueados");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 231, -1, -1));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cola Procesos Terminados");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 413, -1, -1));
 
@@ -401,14 +405,17 @@ public final class Simulacion extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 240));
 
         jLabel4.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Procesador 1");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 15, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Procesador 2");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 15, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Procesador 3");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
@@ -420,6 +427,7 @@ public final class Simulacion extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 355, 251, -1));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Algoritmo Actual:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 332, -1, -1));
 
@@ -431,23 +439,29 @@ public final class Simulacion extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 446, 251, -1));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Número de Ciclo:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 423, -1, -1));
 
-        reloj.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        reloj.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        reloj.setForeground(new java.awt.Color(255, 255, 255));
         reloj.setText("Ciclos Completos: 0");
         jPanel1.add(reloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 501, -1, -1));
 
         exit.setBackground(new java.awt.Color(153, 0, 0));
         exit.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        exit.setForeground(new java.awt.Color(255, 255, 255));
         exit.setText("X");
-        exit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 6));
+        exit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 6));
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
             }
         });
         jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 80, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/1600-x-900-black-m14o1oxj88ccjrbs-2.jpg"))); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -459,7 +473,7 @@ public final class Simulacion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -529,6 +543,7 @@ public final class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
