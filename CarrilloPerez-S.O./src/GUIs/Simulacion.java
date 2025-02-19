@@ -434,6 +434,7 @@ public final class Simulacion extends javax.swing.JFrame {
         jLabel8.setText("Número de Ciclo:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 423, -1, -1));
 
+        reloj.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         reloj.setText("Ciclos Completos: 0");
         jPanel1.add(reloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 501, -1, -1));
 
