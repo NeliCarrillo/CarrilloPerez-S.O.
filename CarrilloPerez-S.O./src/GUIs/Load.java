@@ -46,10 +46,10 @@ public class Load extends javax.swing.JFrame {
             int numcpu = estado.getNumProcesadores();
             
             if(numcpu==2){
-                Simulacion sim = new Simulacion(numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),semaf);
+                Simulacion sim = new Simulacion(cicloreloj, numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),semaf);
                 return sim;
             }else{
-                Simulacion sim = new Simulacion(numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),estado.getEn3(),semaf);
+                Simulacion sim = new Simulacion(cicloreloj,numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),estado.getEn3(),semaf);
                 return sim;
             }
 

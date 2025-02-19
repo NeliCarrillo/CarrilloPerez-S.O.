@@ -58,13 +58,13 @@ public final class Simulacion extends javax.swing.JFrame {
      * Creates new form Simulacion
      * @param i
      */
-    public Simulacion(int i) {
+    public Simulacion(int i,int d) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.numcpu=i;
+        this.setCicloreloj(d);
         this.semf= new Semaforo();
-
         actualizarListos();
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
@@ -72,17 +72,17 @@ public final class Simulacion extends javax.swing.JFrame {
         this.procesador1.setEditable(false);
         this.procesador2.setEditable(false);
         this.procesador3.setEditable(false);
-
         cargarProcesadores();
         this.colaT = new Cola();
         this.colaB = new Cola();
     }
     
-    public Simulacion(int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
+    public Simulacion(int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.semf=semf;
+        this.setCicloreloj(d);
         this.bios= new BIOS(this);
         this.numcpu=i;
         this.listos.setEditable(false);
@@ -97,8 +97,8 @@ public final class Simulacion extends javax.swing.JFrame {
         actualizarListos();
         this.actualizarBloqueadosR();
         this.actualizarTerminadosR();
-        cpu1 = new Procesador(1,colaL,semf,4000,this);
-        cpu2 = new Procesador(2,colaL,semf,4000,this);
+        cpu1 = new Procesador(1,colaL,semf,this.getCicloreloj(),this);
+        cpu2 = new Procesador(2,colaL,semf,this.getCicloreloj(),this);
         cpu1.setProcesoActual(en1);
         cpu2.setProcesoActual(en2);
         bios.start();
@@ -106,11 +106,12 @@ public final class Simulacion extends javax.swing.JFrame {
         cpu2.start();
     }
     
-    public Simulacion(int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Proceso en3, Semaforo semf) {
+    public Simulacion(int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Proceso en3, Semaforo semf) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.semf=semf;
+        this.setCicloreloj(d);
         this.bios= new BIOS(this);
         this.numcpu=i;
         this.listos.setEditable(false);
@@ -213,21 +214,20 @@ public final class Simulacion extends javax.swing.JFrame {
     private void cargarProcesadores(){
         System.out.println(numcpu);
         if(this.numcpu==3){
-            cpu1 = new Procesador(1,colaL,semf,4000,this);
+            cpu1 = new Procesador(1,colaL,semf,this.getCicloreloj(),this);
             cpu1.start();
-            cpu2 = new Procesador(2,colaL,semf,4000,this);
+            cpu2 = new Procesador(2,colaL,semf,this.getCicloreloj(),this);
             cpu2.start();
-            cpu3 = new Procesador(3,colaL,semf,4000,this);
+            cpu3 = new Procesador(3,colaL,semf,this.getCicloreloj(),this);
             cpu3.start();
         }else if (this.numcpu==2){
-            cpu1 = new Procesador(1,colaL,semf,4000,this);
+            cpu1 = new Procesador(1,colaL,semf,this.getCicloreloj(),this);
             cpu1.start();
-            cpu2 = new Procesador(2,colaL,semf,4000,this);
+            cpu2 = new Procesador(2,colaL,semf,this.getCicloreloj(),this);
             cpu2.start();
         }
         this.bios=new BIOS(this);
         bios.start();
-        this.cicloreloj=4000;
     }
     
     public synchronized Simulacion getInstancia() {
