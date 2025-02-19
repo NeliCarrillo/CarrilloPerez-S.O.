@@ -20,10 +20,11 @@ public class EstadoSimulacion {
     private Proceso en1;
     private Proceso en2;
     private Proceso en3;
+    private String politica;
     
 
     // Constructor2
-    public EstadoSimulacion(Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2, Proceso c3) {
+    public EstadoSimulacion(String politca, Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2, Proceso c3) {
         this.semaforo = semaforo;
         this.colaL = colaL;
         this.colaT = colaT;
@@ -33,9 +34,10 @@ public class EstadoSimulacion {
         this.en1=c1;
         this.en2=c2;
         this.en3=c3;
+        this.politica=politca;
     }
     
-    public EstadoSimulacion(Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2) {
+    public EstadoSimulacion(String politca,Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2) {
         this.semaforo = semaforo;
         this.colaL = colaL;
         this.colaT = colaT;
@@ -44,11 +46,15 @@ public class EstadoSimulacion {
         this.numProcesadores=n;
         this.en1=c1;
         this.en2=c2;
+        this.politica=politca;
     }
 
     // Getters y setters
     public Semaforo getSemaforo() {
         return semaforo;
+    }
+    public String getPolitica(){
+        return this.politica;
     }
 
     public void setSemaforo(Semaforo semaforo) {

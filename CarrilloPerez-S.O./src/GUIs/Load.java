@@ -44,12 +44,13 @@ public class Load extends javax.swing.JFrame {
             Cola colaB = estado.getColaB();
             int cicloreloj = estado.getCicloReloj();
             int numcpu = estado.getNumProcesadores();
+            String pl = estado.getPolitica();
             
             if(numcpu==2){
-                Simulacion sim = new Simulacion(cicloreloj, numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),semaf);
+                Simulacion sim = new Simulacion(pl,cicloreloj, numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),semaf);
                 return sim;
             }else{
-                Simulacion sim = new Simulacion(cicloreloj,numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),estado.getEn3(),semaf);
+                Simulacion sim = new Simulacion(pl,cicloreloj,numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),estado.getEn3(),semaf);
                 return sim;
             }
 

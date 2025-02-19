@@ -186,7 +186,7 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
         // TODO add your handling code here:
-        Simulacion sim = new Simulacion(this.numProcesadores,this.duracionCiclo);
+        Simulacion sim = new Simulacion("FCFS",this.numProcesadores,this.duracionCiclo);
         sim.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FinalizarActionPerformed

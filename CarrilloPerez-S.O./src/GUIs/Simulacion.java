@@ -66,10 +66,11 @@ public final class Simulacion extends javax.swing.JFrame {
      * Creates new form Simulacion
      * @param i
      */
-    public Simulacion(int i,int d) {
+    public Simulacion(String plt , int i,int d) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setPolitica(plt);
         this.numcpu=i;
         this.setCicloreloj(d);
         this.semf= new Semaforo();
@@ -85,10 +86,11 @@ public final class Simulacion extends javax.swing.JFrame {
         this.colaB = new Cola();
     }
     
-    public Simulacion(int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
+    public Simulacion(String plt, int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setPolitica(plt);
         this.semf=semf;
         this.setCicloreloj(d);
         this.bios= new BIOS(this);
@@ -114,10 +116,11 @@ public final class Simulacion extends javax.swing.JFrame {
         cpu2.start();
     }
     
-    public Simulacion(int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Proceso en3, Semaforo semf) {
+    public Simulacion(String plt, int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Proceso en3, Semaforo semf) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setPolitica(plt);
         this.semf=semf;
         this.setCicloreloj(d);
         this.bios= new BIOS(this);
@@ -275,7 +278,7 @@ public final class Simulacion extends javax.swing.JFrame {
         Proceso p2 = cpu2.getProcesoActual();
         Proceso p3 = cpu3.getProcesoActual();
         
-        EstadoSimulacion estado = new EstadoSimulacion(this.semf, this.colaL, this.colaT, this.colaB, this.cicloreloj,this.numcpu,p1,p2,p3);
+        EstadoSimulacion estado = new EstadoSimulacion(this.getPolitica(),this.semf, this.colaL, this.colaT, this.colaB, this.cicloreloj,this.numcpu,p1,p2,p3);
         
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -289,7 +292,7 @@ public final class Simulacion extends javax.swing.JFrame {
             Proceso p1 = cpu1.getProcesoActual();
         Proceso p2 = cpu2.getProcesoActual();
         
-        EstadoSimulacion estado = new EstadoSimulacion(this.semf, this.colaL, this.colaT, this.colaB, this.cicloreloj,this.numcpu,p1,p2);
+        EstadoSimulacion estado = new EstadoSimulacion(this.getPolitica(),this.semf, this.colaL, this.colaT, this.colaB, this.cicloreloj,this.numcpu,p1,p2);
         
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
