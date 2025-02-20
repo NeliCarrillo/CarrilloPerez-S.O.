@@ -1,5 +1,6 @@
 package Objetos;
 import EDD.Cola;
+import EDD.Nodo;
 import GUIs.Simulacion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +12,6 @@ import java.util.logging.Logger;
 public class Procesador extends Thread {
     private int id; // Identificador único del procesador
     private Proceso procesoActual; // Proceso que está ejecutando actualmente
-    private final Cola colaListos; // Cola de procesos listos compartida
     private Semaforo semaforo; // Semáforo personalizado para garantizar exclusión mutua
     private volatile boolean activo; // Indica si el procesador está activo
     private int ciclosEjecutados; // Contador de ciclos ejecutados por este procesador
@@ -19,9 +19,8 @@ public class Procesador extends Thread {
     private Simulacion simulacion;
     private boolean interrupcionPendiente=false;
 
-    public Procesador(int id, Cola colaListos, Semaforo semaforo, int cicloReloj,Simulacion simulacion) {
+    public Procesador(int id, Semaforo semaforo, int cicloReloj,Simulacion simulacion) {
         this.id = id;
-        this.colaListos = colaListos;
         this.semaforo = semaforo;
         this.activo = true;
         this.ciclosEjecutados = 0;
@@ -34,14 +33,21 @@ public class Procesador extends Thread {
         while (activo) {
             try {
                 if(procesoActual==null){
-                // Intentar obtener un proceso de la cola de listos
-                semaforo.adquirir(); // Bloqueo para acceder a la cola de listos
-                if (!colaListos.estaVacia()) {
-                    procesoActual = colaListos.obtenerProceso(); // Obtener el siguiente proceso
-                    procesoActual.setEstado("Running");
-                    this.simulacion.actualizarListos();
-                }
-                semaforo.liberar(); // Liberar el semáforo
+                    semaforo.adquirir(); // Bloqueo para acceder a la cola de listos
+                    if (!this.simulacion.getColaL().estaVacia()||!this.simulacion.getColaRespaldo().estaVacia()) {
+                        if("FCFS".equals(this.simulacion.getPolitica())){
+                            if(this.simulacion.getColaL().estaVacia()){
+                                procesoActual = this.simulacion.getColaRespaldo().obtenerProceso(); // Obtener el siguiente proceso
+                            }else{
+                                procesoActual = this.simulacion.getColaL().obtenerProceso(); // Obtener el siguiente proceso
+                            }
+                                                            procesoActual.setEstado("Running");
+                            this.simulacion.textoListos(this.simulacion.getColaL().print());
+                        }else if("RR".equals(this.simulacion.getPolitica())){
+
+                        }
+                    }
+                    semaforo.liberar(); // Liberar el semáforo
                 }
                 if (procesoActual != null) {
                     // Simular la ejecución del proceso
@@ -62,12 +68,12 @@ public class Procesador extends Thread {
     private void ejecutarProceso(Proceso proceso) {
         if("FCFS".equals(this.simulacion.getPolitica())){
             if("CPU Bound".equals(proceso.getTipo())||proceso.desbloqueada()){
-                System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
-                while (proceso.getNumeroInstrucciones() > 0 && activo) {
+                //System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
+                while (proceso.getNumeroInstrucciones() > 0 && activo && !this.simulacion.hayCambioPend()) {
                     try {
                         if (interrupcionPendiente) 
                             manejarInterrupcion();
-                        this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+", STATUS: "+this.procesoActual.getEstado()+", Nombre: "+this.procesoActual.getNombre()+", PC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
+                        this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+"\nSTATUS: "+this.procesoActual.getEstado()+"\nNombre: "+this.procesoActual.getNombre()+"\nPC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
                         Thread.sleep(cicloReloj); // Simular la ejecución de una instrucción (ajustado al ciclo de reloj)
                         proceso.setNumeroInstrucciones(proceso.getNumeroInstrucciones()-1);
                         ciclosEjecutados++;
@@ -77,7 +83,7 @@ public class Procesador extends Thread {
                         e.printStackTrace();
                     }
                 }
-                if(activo){
+                if(activo&& procesoActual.getNumeroInstrucciones()==0){
                     System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
                     this.simulacion.getInstancia().actualizarTextoArea("Procesador tomado por \nel Sistema Operativo...",this.id);
                     procesoActual.setEstado("Finished");
@@ -89,13 +95,16 @@ public class Procesador extends Thread {
                         e.printStackTrace();
                     }
                 }
+                if(this.simulacion.hayCambioPend()){
+                    this.gestionarCambio(procesoActual);
+                }
             }else{
                 if(!proceso.desbloqueada()){
                     proceso.setIdProcesador(this.id);
-                    System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
-                    while (proceso.NoHaSucedidoInterrupcion() && activo) {
+                    //System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
+                    while (proceso.NoHaSucedidoInterrupcion() && activo && !this.simulacion.hayCambioPend()) {
                         try {
-                            this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+", STATUS: "+this.procesoActual.getEstado()+", Nombre: "+this.procesoActual.getNombre()+", PC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
+                            this.simulacion.getInstancia().actualizarTextoArea("ID: "+ this.procesoActual.getId()+"\nSTATUS: "+this.procesoActual.getEstado()+"\nNombre: "+this.procesoActual.getNombre()+"\nPC: "+this.procesoActual.getPC()+", MAR: "+this.procesoActual.getMAR(),this.id);
                             Thread.sleep(cicloReloj); // Simular la ejecución de una instrucción (ajustado al ciclo de reloj)
                             proceso.setNumeroInstrucciones(proceso.getNumeroInstrucciones()-1);
                             ciclosEjecutados++;
@@ -105,7 +114,7 @@ public class Procesador extends Thread {
                             e.printStackTrace();
                         }
                     }
-                    if(activo){
+                    if(activo&& procesoActual.getNumeroInstrucciones()==0){
                     //System.out.println("Procesador " + id + " terminó el proceso: " + proceso.getNombre());
                     this.simulacion.getInstancia().actualizarTextoArea("Procesador tomado por \nel Sistema Operativo...",this.id);
                     procesoActual.setEstado("Blocked");
@@ -116,8 +125,10 @@ public class Procesador extends Thread {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }}
+                    if(this.simulacion.hayCambioPend()){
+                        this.gestionarCambio(procesoActual);
+                    }
                 }
-
             }
         }else{
             
@@ -168,6 +179,19 @@ public class Procesador extends Thread {
     public synchronized void setCicloReloj(int cicloReloj) {
         this.cicloReloj = cicloReloj; // Permitir cambiar el ciclo de reloj dinámicamente
         System.out.println("Procesador " + id + ": Ciclo de reloj actualizado a " + cicloReloj + " ms.");
+    }
+    
+    public void gestionarCambio(Proceso proceso){
+        try {
+            this.simulacion.getInstancia().actualizarTextoArea("Interrupción del SO\nCambio de política",this.id);
+            this.simulacion.aggRespaldo(proceso);
+            procesoActual.setEstado("Ready");
+            procesoActual=null;
+            Thread.sleep(cicloReloj);
+            this.simulacion.Fincambio();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Procesador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
        
 }

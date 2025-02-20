@@ -7,8 +7,8 @@
       "elemento": {
         "id": 3,
         "idProcesador": 0,
-        "nombre": "234",
-        "numeroInstruccionesRestantes": 23,
+        "nombre": "345",
+        "numeroInstruccionesRestantes": 32,
         "numerototalInstrucciones": 0,
         "ciclosParaGenerarExcepcion": 0,
         "ciclosParaSatisfacerExcepcion": 0,
@@ -24,13 +24,13 @@
         "elemento": {
           "id": 4,
           "idProcesador": 0,
-          "nombre": "34",
+          "nombre": "3452",
           "numeroInstruccionesRestantes": 34,
           "numerototalInstrucciones": 0,
           "ciclosParaGenerarExcepcion": 0,
           "ciclosParaSatisfacerExcepcion": 0,
           "tipo": "CPU Bound",
-          "prioridad": 34,
+          "prioridad": 234,
           "estado": "Ready",
           "PC": 1,
           "MAR": 0,
@@ -41,13 +41,13 @@
           "elemento": {
             "id": 5,
             "idProcesador": 0,
-            "nombre": "23",
-            "numeroInstruccionesRestantes": 21,
+            "nombre": "345",
+            "numeroInstruccionesRestantes": 345,
             "numerototalInstrucciones": 0,
             "ciclosParaGenerarExcepcion": 0,
             "ciclosParaSatisfacerExcepcion": 0,
             "tipo": "CPU Bound",
-            "prioridad": 12,
+            "prioridad": 452,
             "estado": "Ready",
             "PC": 1,
             "MAR": 0,
@@ -58,18 +58,36 @@
             "elemento": {
               "id": 6,
               "idProcesador": 0,
-              "nombre": "12",
-              "numeroInstruccionesRestantes": 11,
+              "nombre": "2343",
+              "numeroInstruccionesRestantes": 232,
               "numerototalInstrucciones": 0,
               "ciclosParaGenerarExcepcion": 0,
               "ciclosParaSatisfacerExcepcion": 0,
               "tipo": "CPU Bound",
-              "prioridad": 1,
+              "prioridad": 3,
               "estado": "Ready",
               "PC": 1,
               "MAR": 0,
               "EScompletada": false,
               "ciclosBloqueado": 0
+            },
+            "siguiente": {
+              "elemento": {
+                "id": 7,
+                "idProcesador": 0,
+                "nombre": "234",
+                "numeroInstruccionesRestantes": 23,
+                "numerototalInstrucciones": 0,
+                "ciclosParaGenerarExcepcion": 0,
+                "ciclosParaSatisfacerExcepcion": 0,
+                "tipo": "CPU Bound",
+                "prioridad": 23,
+                "estado": "Ready",
+                "PC": 1,
+                "MAR": 0,
+                "EScompletada": false,
+                "ciclosBloqueado": 0
+              }
             }
           }
         }
@@ -77,15 +95,15 @@
     },
     "fin": {
       "elemento": {
-        "id": 6,
+        "id": 7,
         "idProcesador": 0,
-        "nombre": "12",
-        "numeroInstruccionesRestantes": 11,
+        "nombre": "234",
+        "numeroInstruccionesRestantes": 23,
         "numerototalInstrucciones": 0,
         "ciclosParaGenerarExcepcion": 0,
         "ciclosParaSatisfacerExcepcion": 0,
         "tipo": "CPU Bound",
-        "prioridad": 1,
+        "prioridad": 23,
         "estado": "Ready",
         "PC": 1,
         "MAR": 0,
@@ -93,7 +111,7 @@
         "ciclosBloqueado": 0
       }
     },
-    "tamaño": 4
+    "tamaño": 5
   },
   "colaT": {
     "tamaño": 0
@@ -106,34 +124,34 @@
   "en1": {
     "id": 1,
     "idProcesador": 0,
-    "nombre": "2",
-    "numeroInstruccionesRestantes": 1939,
+    "nombre": "13212",
+    "numeroInstruccionesRestantes": 123038,
     "numerototalInstrucciones": 0,
     "ciclosParaGenerarExcepcion": 0,
     "ciclosParaSatisfacerExcepcion": 0,
     "tipo": "CPU Bound",
-    "prioridad": 1,
+    "prioridad": 123123,
     "estado": "Running",
-    "PC": 195,
-    "MAR": 194,
+    "PC": 86,
+    "MAR": 85,
     "EScompletada": false,
     "ciclosBloqueado": 0
   },
   "en2": {
     "id": 2,
     "idProcesador": 0,
-    "nombre": "123",
-    "numeroInstruccionesRestantes": 40,
+    "nombre": "23",
+    "numeroInstruccionesRestantes": 260,
     "numerototalInstrucciones": 0,
     "ciclosParaGenerarExcepcion": 0,
     "ciclosParaSatisfacerExcepcion": 0,
     "tipo": "CPU Bound",
-    "prioridad": 234,
+    "prioridad": 345,
     "estado": "Running",
-    "PC": 195,
-    "MAR": 194,
+    "PC": 86,
+    "MAR": 85,
     "EScompletada": false,
     "ciclosBloqueado": 0
   },
-  "politica": "RR"
+  "politica": "FCFS"
 }

@@ -26,7 +26,8 @@ import java.util.logging.Logger;
  */
 public final class Simulacion extends javax.swing.JFrame {
     
-    Cola colaL = colaListos;
+    Cola colaL = new Cola();
+    Cola colaRespaldo= new Cola();
     Cola colaT;
     Cola colaB;
     Semaforo semf;
@@ -37,6 +38,7 @@ public final class Simulacion extends javax.swing.JFrame {
     BIOS bios;
     int numcpu;
     String politica;
+    boolean huboCambio;
 
     private Simulacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -68,6 +70,7 @@ public final class Simulacion extends javax.swing.JFrame {
      */
     public Simulacion(String plt , int i,int d) {
         initComponents();
+        this.huboCambio=false;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setPolitica(plt);
@@ -88,6 +91,7 @@ public final class Simulacion extends javax.swing.JFrame {
     
     public Simulacion(String plt, int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
         initComponents();
+        this.huboCambio=false;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setPolitica(plt);
@@ -107,8 +111,8 @@ public final class Simulacion extends javax.swing.JFrame {
         actualizarListos();
         this.actualizarBloqueadosR();
         this.actualizarTerminadosR();
-        cpu1 = new Procesador(1,colaL,semf,this.getCicloreloj(),this);
-        cpu2 = new Procesador(2,colaL,semf,this.getCicloreloj(),this);
+        cpu1 = new Procesador(1,semf,this.getCicloreloj(),this);
+        cpu2 = new Procesador(2,semf,this.getCicloreloj(),this);
         cpu1.setProcesoActual(en1);
         cpu2.setProcesoActual(en2);
         bios.start();
@@ -118,6 +122,7 @@ public final class Simulacion extends javax.swing.JFrame {
     
     public Simulacion(String plt, int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Proceso en3, Semaforo semf) {
         initComponents();
+        this.huboCambio=false;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setPolitica(plt);
@@ -137,9 +142,9 @@ public final class Simulacion extends javax.swing.JFrame {
         actualizarListos();
         this.actualizarBloqueadosR();
         this.actualizarTerminadosR();
-        cpu1 = new Procesador(1,colaL,semf,4000,this);
-        cpu2 = new Procesador(2,colaL,semf,4000,this);
-        cpu3 = new Procesador(3,colaL,semf,4000,this);
+        cpu1 = new Procesador(1,semf,4000,this);
+        cpu2 = new Procesador(2,semf,4000,this);
+        cpu3 = new Procesador(3,semf,4000,this);
         cpu1.setProcesoActual(en1);
         cpu2.setProcesoActual(en2);
         cpu3.setProcesoActual(en3);
@@ -156,8 +161,22 @@ public final class Simulacion extends javax.swing.JFrame {
     }
 
 
-    public void actualizarListos(){
+    public synchronized void actualizarListos(){
         listos.setText(colaL.print());
+    }
+    
+    public synchronized void actualizarListos(Cola L){
+        listos.setText(L.print());
+    }
+    
+    public Cola getColaL(){
+        return this.colaL;
+        
+    }
+    
+    public Cola getColaRespaldo(){
+        return this.colaRespaldo;
+        
     }
     
     public void aggListos(Proceso p){
@@ -196,6 +215,26 @@ public final class Simulacion extends javax.swing.JFrame {
         terminados.setText(colaT.print());
     }
     
+    
+    public synchronized void actualizarListos(Proceso tu){
+        Cola copia = this.colaL.copiar();
+        copia.agregar(tu);
+        this.listos.setText(copia.print());
+        this.colaL=copia;
+    }
+    
+    public synchronized void aggRespaldo(Proceso ele){
+        this.colaRespaldo.agregar(ele);
+    }
+    
+    public synchronized void actualizarListosCP(Proceso tu){
+        Cola copia = this.colaL.copiar();
+        copia.agregar(tu);
+        this.listos.setText(copia.print()); //copia.print()
+        this.colaL=copia;
+        colaListos=this.colaL;
+    }
+    
     public void actualizarBloqueados(Proceso t){
         Cola copia = this.colaB.copiar();
         copia.agregar(t);
@@ -205,6 +244,34 @@ public final class Simulacion extends javax.swing.JFrame {
     
     public void actualizarBloqueadosR(){
         bloqueados.setText(colaB.print());
+    }
+    
+    public synchronized void unirColas() {
+        // Mientras la cola de respaldo no esté vacía
+        while (!colaRespaldo.estaVacia()) {
+            // Extraer el primer elemento de la cola de respaldo
+            Proceso proceso = colaRespaldo.obtenerProceso();
+
+            // Agregar el elemento a la cola principal (colaL)
+            colaL.agregar(proceso);
+        }
+        System.out.println(colaL.print());
+
+        // Al final, la cola de respaldo quedará vacía
+        // y colaL contendrá todos los elementos de ambas colas
+    }
+
+    
+    public synchronized void cambio(){
+        this.huboCambio=true;
+    }
+    
+    public boolean hayCambioPend(){
+        return this.huboCambio==true;
+    }
+    
+    public synchronized void Fincambio(){
+        this.huboCambio=false;
     }
     
     public Cola getBloqueados(){
@@ -225,16 +292,16 @@ public final class Simulacion extends javax.swing.JFrame {
     private void cargarProcesadores(){
         System.out.println(numcpu);
         if(this.numcpu==3){
-            cpu1 = new Procesador(1,colaL,semf,this.getCicloreloj(),this);
+            cpu1 = new Procesador(1,semf,this.getCicloreloj(),this);
             cpu1.start();
-            cpu2 = new Procesador(2,colaL,semf,this.getCicloreloj(),this);
+            cpu2 = new Procesador(2,semf,this.getCicloreloj(),this);
             cpu2.start();
-            cpu3 = new Procesador(3,colaL,semf,this.getCicloreloj(),this);
+            cpu3 = new Procesador(3,semf,this.getCicloreloj(),this);
             cpu3.start();
         }else if (this.numcpu==2){
-            cpu1 = new Procesador(1,colaL,semf,this.getCicloreloj(),this);
+            cpu1 = new Procesador(1,semf,this.getCicloreloj(),this);
             cpu1.start();
-            cpu2 = new Procesador(2,colaL,semf,this.getCicloreloj(),this);
+            cpu2 = new Procesador(2,semf,this.getCicloreloj(),this);
             cpu2.start();
         }
         this.bios=new BIOS(this);
@@ -243,6 +310,10 @@ public final class Simulacion extends javax.swing.JFrame {
     
     public synchronized Simulacion getInstancia() {
         return instancia;
+    }
+    
+    public synchronized Cola getColaListos(){
+        return this.colaL;
     }
     
     public void actualizarTextoArea(String texto,int id) {
@@ -268,6 +339,10 @@ public final class Simulacion extends javax.swing.JFrame {
         if (cpu2 != null) cpu2.detener();
         if (cpu3 != null) cpu3.detener();
         if (bios != null) bios.detener();
+    }
+    
+    public void textoListos(String t){
+        this.listos.setText(t+this.colaRespaldo.print());
     }
     
     public void guardarEstado(String rutaArchivo) {
@@ -492,9 +567,10 @@ public final class Simulacion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Politicas cpol = new Politicas(this);
-        cpol.setVisible(true);
-        this.setVisible(false);
+        this.cambio();
+        //Politicas cpol = new Politicas(this);
+        //cpol.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

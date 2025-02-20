@@ -3,15 +3,17 @@ package EDD;
 import Objetos.Proceso;
 
 public class Cola {
-    private Nodo frente; // Primer nodo de la cola
-    private Nodo fin;    // Último nodo de la cola
-    private int tamaño;  // Número de elementos en la cola
+    private Nodo frente =null; // Primer nodo de la cola
+    private Nodo fin= null;    // Último nodo de la cola
+    private int tamaño=0;  // Número de elementos en la cola
+    private String resultado="";
 
     // Constructor
     public Cola() {
         this.frente = null;
         this.fin = null;
         this.tamaño = 0;
+        this.resultado="";
     }
 
     // Método para verificar si la cola está vacía
@@ -20,14 +22,43 @@ public class Cola {
     }
 
     // Método para agregar un elemento a la cola
-    public void agregar(Proceso elemento) {
+    public synchronized void agregar(Proceso elemento) {
+        //this.resultado="";
+        //Nodo salvoguardo = fin;
         Nodo nuevoNodo = new Nodo(elemento);
         if (estaVacia()) {
             frente = nuevoNodo; // Si la cola está vacía, el nuevo nodo es el frente
             fin = nuevoNodo;    // y también el fin
         } else {
             fin.setSiguiente(nuevoNodo); // Enlazar el nuevo nodo al final de la cola
+            //System.out.println("conexion desde .  "+fin.getElemento().getId()+" . a   "+fin.getSiguiente().getElemento().getId());
+            //salvoguardo = fin;
             fin = nuevoNodo;            // Actualizar el fin
+        }
+        tamaño++;
+        /*Nodo salvo = frente;
+        while(salvo.getSiguiente()!=null){
+            System.out.println("El siguiente de "+salvo.getElemento().getId()+"es"+salvo.getSiguiente().getElemento().getId());
+            resultado += salvo.getElemento().print()+"\n"+salvo.getSiguiente().getElemento().print()+"\n";
+            salvo=salvo.getSiguiente();
+        }
+        while(salvoguardo.getSiguiente()!=null){
+                        System.out.println("\nsalvog \nEl siguiente de "+salvoguardo.getElemento().getId()+"es"+salvoguardo.getSiguiente().getElemento().getId());
+            resultado += salvoguardo.getElemento().print()+"\n"+salvoguardo.getSiguiente().getElemento().print()+"\n";
+            salvoguardo=salvoguardo.getSiguiente();
+        }
+        System.out.println("\nIniciolol "+frente.getElemento().getId()+"\nFin "+fin.getElemento().getId()+"\n\n"+resultado);
+        */
+    }
+    
+    public synchronized void agregarPpio(Proceso el){
+        Nodo nuevoNodo = new Nodo(el);
+        if (estaVacia()) {
+            frente = nuevoNodo; // Si la cola está vacía, el nuevo nodo es el frente
+            fin = nuevoNodo;    // y también el fin
+        } else {
+            nuevoNodo.setSiguiente(frente);
+            frente = nuevoNodo;            // Actualizar el fin
         }
         tamaño++;
     }
