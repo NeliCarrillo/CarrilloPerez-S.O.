@@ -41,7 +41,7 @@ public class Procesador extends Thread {
                             }else{
                                 procesoActual = this.simulacion.getColaL().obtenerProceso(); // Obtener el siguiente proceso
                             }
-                                                            procesoActual.setEstado("Running");
+                            procesoActual.setEstado("Running");
                             this.simulacion.textoListos(this.simulacion.getColaL().print());
                         }else if("RR".equals(this.simulacion.getPolitica())){
 
