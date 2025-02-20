@@ -34,10 +34,10 @@ public class Procesador extends Thread {
             try {
                 if(procesoActual==null){
                     semaforo.adquirir(); // Bloqueo para acceder a la cola de listos
-                    if (!this.simulacion.getColaL().estaVacia()||!this.simulacion.getColaRespaldo().estaVacia()) {
+                    if (!this.simulacion.getColaL().estaVacia()||!this.simulacion.getColaRespaldoListos().estaVacia()) {
                         if("FCFS".equals(this.simulacion.getPolitica())){
                             if(this.simulacion.getColaL().estaVacia()){
-                                procesoActual = this.simulacion.getColaRespaldo().obtenerProceso(); // Obtener el siguiente proceso
+                                procesoActual = this.simulacion.getColaRespaldoListos().obtenerProceso(); // Obtener el siguiente proceso
                             }else{
                                 procesoActual = this.simulacion.getColaL().obtenerProceso(); // Obtener el siguiente proceso
                             }

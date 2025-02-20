@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public final class Simulacion extends javax.swing.JFrame {
     
     Cola colaL = new Cola();
-    Cola colaRespaldo= new Cola();
+    Cola colaRespaldoListos= new Cola();
     Cola colaT;
     Cola colaB;
     Semaforo semf;
@@ -175,8 +175,8 @@ public final class Simulacion extends javax.swing.JFrame {
         
     }
     
-    public Cola getColaRespaldo(){
-        return this.colaRespaldo;
+    public Cola getColaRespaldoListos(){
+        return this.colaRespaldoListos;
         
     }
     
@@ -225,7 +225,7 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     public synchronized void aggRespaldo(Proceso ele){
-        this.colaRespaldo.agregar(ele);
+        this.colaRespaldoListos.agregar(ele);
     }
     public void actualizarBloqueados(Proceso t){
         Cola copia = this.colaB.copiar();
@@ -240,9 +240,9 @@ public final class Simulacion extends javax.swing.JFrame {
     
     public synchronized void unirColas() {
         // Mientras la cola de respaldo no esté vacía
-        while (!colaRespaldo.estaVacia()) {
+        while (!colaRespaldoListos.estaVacia()) {
             // Extraer el primer elemento de la cola de respaldo
-            Proceso proceso = colaRespaldo.obtenerProceso();
+            Proceso proceso = colaRespaldoListos.obtenerProceso();
 
             // Agregar el elemento a la cola principal (colaL)
             colaL.agregar(proceso);
@@ -334,7 +334,7 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     public void textoListos(String t){
-        this.listos.setText(t+this.colaRespaldo.print());
+        this.listos.setText(t+this.colaRespaldoListos.print());
     }
     
     public void guardarEstado(String rutaArchivo) {
