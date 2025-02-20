@@ -252,7 +252,7 @@ public final class Simulacion extends javax.swing.JFrame {
         // Al final, la cola de respaldo quedará vacía
         // y colaL contendrá todos los elementos de ambas colas
     }
-
+//hola
     
     public synchronized void cambio(){
         this.huboCambio=true;
