@@ -14,7 +14,7 @@ import Objetos.Proceso;
 public class CreacionProceso extends javax.swing.JFrame {
 
     
-    static Cola colaListos = new Cola();
+    public static Cola colaprocesos = new Cola();
     private String tipot="CPU Bound";
     private int numProcesadores;
     private int duracionCiclo;
@@ -172,8 +172,8 @@ public class CreacionProceso extends javax.swing.JFrame {
         clear(); //OJO
         if("CPU Bound".equals(tipot)){
             Proceso elem = new Proceso(nombrel,inst,"CPU Bound",prio);
-            System.out.println("se agrego cpu bound");
-            colaListos.agregar(elem);
+            System.out.println("Se agregó cpu bound.");
+            colaprocesos.agregar(elem);
         }else if ("I/O Bound".equals(tipot)){
             IOBound detalles = new IOBound(this,nombrel,inst,prio);
         }

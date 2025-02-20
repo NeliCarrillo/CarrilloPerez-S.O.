@@ -4,7 +4,7 @@
  */
 package GUIs;
 
-import static GUIs.CreacionProceso.colaListos;
+import static GUIs.CreacionProceso.colaprocesos;
 import Objetos.Proceso;
 
 /**
@@ -96,7 +96,7 @@ public class IOBound extends javax.swing.JFrame {
         int ciclosc =Integer.parseInt(this.cicloscompletar.getText());
         Proceso ele = new Proceso(this.name,this.instruc,"I/O Bound",this.prio,ciclose,ciclosc);
         System.out.println("se agrego io bound");
-        colaListos.agregar(ele);
+        colaprocesos.agregar(ele);
         inty.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_saveActionPerformed

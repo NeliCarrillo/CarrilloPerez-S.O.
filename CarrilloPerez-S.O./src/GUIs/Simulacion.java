@@ -5,7 +5,7 @@
 package GUIs;
 import EDD.Cola;
 import EDD.Nodo;
-import static GUIs.CreacionProceso.colaListos;
+import static GUIs.CreacionProceso.colaprocesos;
 import Objetos.BIOS;
 import Objetos.EstadoSimulacion;
 import Objetos.Procesador;
@@ -84,6 +84,7 @@ public final class Simulacion extends javax.swing.JFrame {
         this.procesador1.setEditable(false);
         this.procesador2.setEditable(false);
         this.procesador3.setEditable(false);
+        this.colaL=colaprocesos;
         cargarProcesadores();
         this.colaT = new Cola();
         this.colaB = new Cola();
@@ -226,15 +227,6 @@ public final class Simulacion extends javax.swing.JFrame {
     public synchronized void aggRespaldo(Proceso ele){
         this.colaRespaldo.agregar(ele);
     }
-    
-    public synchronized void actualizarListosCP(Proceso tu){
-        Cola copia = this.colaL.copiar();
-        copia.agregar(tu);
-        this.listos.setText(copia.print()); //copia.print()
-        this.colaL=copia;
-        colaListos=this.colaL;
-    }
-    
     public void actualizarBloqueados(Proceso t){
         Cola copia = this.colaB.copiar();
         copia.agregar(t);
