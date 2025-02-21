@@ -50,6 +50,7 @@ public class NumProcesadores extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         duracion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,7 +73,7 @@ public class NumProcesadores extends javax.swing.JFrame {
                 confirmActionPerformed(evt);
             }
         });
-        getContentPane().add(confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
+        getContentPane().add(confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jButton1.setText("Atrás");
@@ -96,6 +97,15 @@ public class NumProcesadores extends javax.swing.JFrame {
         jLabel4.setText("millis");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
 
+        jButton2.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
+        jButton2.setText("Reutilizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/background.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 290));
 
@@ -110,10 +120,16 @@ public class NumProcesadores extends javax.swing.JFrame {
 
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
         // TODO add your handling code here:
-        CreacionProceso l = new CreacionProceso(this.getCPU(),this.getDuracion());
+        Simulacion sim = new Simulacion("FCFS",this.getCPU(),this.getDuracion());
+        CreacionProceso l = new CreacionProceso(sim,this.getCPU(),this.getDuracion());
+        sim.setVisible(true);
         l.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_confirmActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +169,7 @@ public class NumProcesadores extends javax.swing.JFrame {
     private javax.swing.JTextField cpus;
     private javax.swing.JTextField duracion;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

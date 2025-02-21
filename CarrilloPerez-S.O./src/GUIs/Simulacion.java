@@ -38,7 +38,7 @@ public final class Simulacion extends javax.swing.JFrame {
     BIOS bios;
     int numcpu;
     String politica;
-    boolean huboCambio;
+    boolean huboCambio=false;
 
     private Simulacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -77,8 +77,7 @@ public final class Simulacion extends javax.swing.JFrame {
         this.numcpu=i;
         this.setCicloreloj(d);
         this.semf= new Semaforo();
-        actualizarListos();
-                this.textoListos(this.getColaL().print());
+        this.textoListos(this.getColaL().print());
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
         this.terminados.setEditable(false);
@@ -86,9 +85,17 @@ public final class Simulacion extends javax.swing.JFrame {
         this.procesador2.setEditable(false);
         this.procesador3.setEditable(false);
         this.colaL=colaprocesos;
-        cargarProcesadores();
         this.colaT = new Cola();
         this.colaB = new Cola();
+    }
+    
+    public boolean empezoYa(){
+        return this.cpu1 != null;
+    }
+    
+    public void iniciar(){
+        actualizarListos();
+        cargarProcesadores();
     }
     
     public Simulacion(String plt, int d, int i,Cola colalistos, Cola colabloq, Cola colaterm,Proceso en1,Proceso en2, Semaforo semf) {
@@ -232,10 +239,8 @@ public final class Simulacion extends javax.swing.JFrame {
         this.colaRespaldoListos.agregar(ele);
     }
     public void actualizarBloqueados(Proceso t){
-        Cola copia = this.colaB.copiar();
-        copia.agregar(t);
+        this.colaB.agregar(t);
         this.bloqueados.setText(colaB.print());
-        this.colaB=copia;
     }
     
     public void actualizarBloqueadosR(){
@@ -338,7 +343,7 @@ public final class Simulacion extends javax.swing.JFrame {
     }
     
     public void textoListos(String t){
-        this.listos.setText(t+this.colaRespaldoListos.print());
+        this.listos.setText(t);
     }
     
     public void unirColaListos(){
@@ -349,6 +354,12 @@ public final class Simulacion extends javax.swing.JFrame {
             }
         }
     }
+    
+    public void aggListosppio(Proceso p){
+        colaL.agregarPpio(p);
+        listos.setText(colaL.print());
+    }
+    
     
     public void guardarEstado(String rutaArchivo) {
         detenerHilos(); // Detener los hilos antes de guardar
@@ -426,6 +437,7 @@ public final class Simulacion extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         reloj = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -493,7 +505,7 @@ public final class Simulacion extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 67, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 240));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 250));
 
         jLabel4.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -551,6 +563,19 @@ public final class Simulacion extends javax.swing.JFrame {
         });
         jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 80, -1));
 
+        jButton3.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/addprocess.png"))); // NOI18N
+        jButton3.setText("Añadir Proceso");
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, 190, 50));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/1600-x-900-black-m14o1oxj88ccjrbs-2.jpg"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 630));
 
@@ -587,6 +612,10 @@ public final class Simulacion extends javax.swing.JFrame {
         this.dispose();
         System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -628,6 +657,7 @@ public final class Simulacion extends javax.swing.JFrame {
     private javax.swing.JButton exit;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

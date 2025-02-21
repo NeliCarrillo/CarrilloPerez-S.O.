@@ -147,7 +147,7 @@ public class Proceso{
     }
     
     public boolean finalizadaES(){
-        if(ciclosBloqueado==this.ciclosParaSatisfacerExcepcion){
+        if((ciclosBloqueado)==this.ciclosParaSatisfacerExcepcion){
             this.EScompletada=true;
             return true;
         }

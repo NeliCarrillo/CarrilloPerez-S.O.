@@ -28,11 +28,12 @@ public class BIOS extends Thread{
     public void run() {
         while (activo) {
             try {
+                    checkIO();
                     Thread.sleep(cicloReloj);
                     ciclos++;
                     this.sim.sumReloj(ciclos);
                     System.out.println(ciclos);
-                    checkIO();
+                    
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -44,13 +45,12 @@ public class BIOS extends Thread{
         Nodo actual = colaB.getTop();
         Nodo anterior = null;
 
-        while (actual != null&&activo) {
+        while (actual != null) {
             Proceso p = actual.getElemento();
             if(p.irInterrumpiendo()){
                     this.sim.irInterrumpiendo(p);
             }
-            p.sumarCicloBloqueado();
-            
+            p.sumarCicloBloqueado();            
 
             if (p.finalizadaES()) {
                 

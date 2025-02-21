@@ -18,6 +18,8 @@ public class CreacionProceso extends javax.swing.JFrame {
     private String tipot="CPU Bound";
     private int numProcesadores;
     private int duracionCiclo;
+    private Simulacion sim;
+    private Proceso creado;
 
     
     /**
@@ -29,10 +31,11 @@ public class CreacionProceso extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public CreacionProceso(int neu, int dur) {
+    public CreacionProceso(Simulacion si,int neu, int dur) {
         initComponents();
         this.numProcesadores=neu;
         this.duracionCiclo=dur;
+        this.sim=si;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -124,7 +127,7 @@ public class CreacionProceso extends javax.swing.JFrame {
         Finalizar.setFont(new java.awt.Font("Beirut", 1, 13)); // NOI18N
         Finalizar.setForeground(new java.awt.Color(255, 255, 255));
         Finalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/play-button-icon-png-28.png"))); // NOI18N
-        Finalizar.setText("Iniciar");
+        Finalizar.setText("OK");
         Finalizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 0), 2));
         Finalizar.setContentAreaFilled(false);
         Finalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,9 +174,13 @@ public class CreacionProceso extends javax.swing.JFrame {
         int prio = Integer.parseInt(this.prioridad.getText());
         clear(); //OJO
         if("CPU Bound".equals(tipot)){
-            Proceso elem = new Proceso(nombrel,inst,"CPU Bound",prio);
+            creado = new Proceso(nombrel,inst,"CPU Bound",prio);
             System.out.println("Se agregó cpu bound.");
-            colaprocesos.agregar(elem);
+            if(this.sim.empezoYa()){
+                this.sim.actualizarListos(creado);
+            }else{
+                colaprocesos.agregar(creado);
+            }
         }else if ("I/O Bound".equals(tipot)){
             IOBound detalles = new IOBound(this,nombrel,inst,prio);
         }
@@ -186,9 +193,12 @@ public class CreacionProceso extends javax.swing.JFrame {
 
     private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
         // TODO add your handling code here:
-        Simulacion sim = new Simulacion("FCFS",this.numProcesadores,this.duracionCiclo);
-        sim.setVisible(true);
-        this.dispose();
+        if(!this.sim.empezoYa()){
+            this.sim.iniciar();
+            this.dispose();
+        }else{
+            
+        }
     }//GEN-LAST:event_FinalizarActionPerformed
 
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed

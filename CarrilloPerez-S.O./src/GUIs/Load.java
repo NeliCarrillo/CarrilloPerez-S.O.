@@ -81,37 +81,37 @@ public class Load extends javax.swing.JFrame {
     private void initComponents() {
 
         loadTXT = new javax.swing.JButton();
-        loadP = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loadTXT.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
-        loadTXT.setText("Cargar Sólo Procesos Guardados");
+        loadTXT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/3616929-2.png"))); // NOI18N
+        loadTXT.setContentAreaFilled(false);
         loadTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadTXTActionPerformed(evt);
             }
         });
-        getContentPane().add(loadTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 310, 44));
-
-        loadP.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
-        loadP.setText("Cargar Nuevos Procesos a los Guardados");
-        getContentPane().add(loadP, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 310, 45));
+        getContentPane().add(loadTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 100, 90));
 
         jButton1.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
-        jButton1.setText("Iniciar con Nuevos Procesos");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/585602-2.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 270, 300, 45));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 210, 190));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,12 +128,29 @@ public class Load extends javax.swing.JFrame {
         jLabel4.setText("UNIVERSIDAD METROPOLITANA");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Beirut", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("cargar simulación ");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Beirut", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("   Nueva   Simulación");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/background.jpg"))); // NOI18N
         jLabel1.setText("                  ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 430));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        NumProcesadores n = new NumProcesadores(this);
+        n.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void loadTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTXTActionPerformed
         // TODO add your handling code here:
@@ -142,13 +159,6 @@ public class Load extends javax.swing.JFrame {
         sim.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_loadTXTActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        NumProcesadores n = new NumProcesadores(this);
-        n.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +201,8 @@ public class Load extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JButton loadP;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton loadTXT;
     // End of variables declaration//GEN-END:variables
 }
