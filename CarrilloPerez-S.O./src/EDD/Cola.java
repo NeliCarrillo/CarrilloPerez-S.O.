@@ -149,5 +149,46 @@ public class Cola {
         return nodoMasCorto.getElemento(); // Devolver el proceso eliminado
     }
     
+    // Método para buscar y eliminar el proceso más corto
+    public Proceso eliminarMayorTasaRespuesta() {
+        if (frente == null) {
+            // La cola está vacía
+            return null;
+        }
+
+        Nodo actual = frente;
+        Nodo anterior = null;
+
+        Nodo nodoMasCorto = frente;
+        Nodo anteriorMasCorto = null;
+
+        // Buscar el nodo con el proceso más corto
+        while (actual != null) {
+            if (actual.getElemento().getTasaRespuesta() > nodoMasCorto.getElemento().getTasaRespuesta()) {
+                nodoMasCorto = actual;
+                anteriorMasCorto = anterior;
+            }
+            anterior = actual;
+            actual = actual.getSiguiente();
+        }
+
+        // Eliminar el nodo más corto de la cola
+        if (nodoMasCorto == frente) {
+            // Si el nodo más corto es el primero
+            frente = frente.getSiguiente();
+        } else {
+            // Si el nodo más corto está en el medio o al final
+            anteriorMasCorto.setSiguiente(nodoMasCorto.getSiguiente());
+        }
+
+        if (nodoMasCorto == fin) {
+            // Si el nodo más corto es el último
+            fin = anteriorMasCorto;
+        }
+
+        tamaño--; // Reducir el tamaño de la cola
+        return nodoMasCorto.getElemento(); // Devolver el proceso eliminado
+    }
+    
     
 }

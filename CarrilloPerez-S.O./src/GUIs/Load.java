@@ -94,6 +94,7 @@ public class Load extends javax.swing.JFrame {
 
         loadTXT.setFont(new java.awt.Font("Beirut", 0, 13)); // NOI18N
         loadTXT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/3616929-2.png"))); // NOI18N
+        loadTXT.setBorderPainted(false);
         loadTXT.setContentAreaFilled(false);
         loadTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +107,7 @@ public class Load extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIsImages/585602-2.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
+        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
