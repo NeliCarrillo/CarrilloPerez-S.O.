@@ -403,6 +403,19 @@ public final class Simulacion extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        
+    }
+    
+    public void informarCPUS(){
+        if(this.numcpu==3){
+            cpu1.seAgrego();
+            cpu2.seAgrego();
+            cpu3.seAgrego();
+        }else if (this.numcpu==2){
+            cpu1.seAgrego();
+            cpu2.seAgrego();
+        }
     }
     
     
@@ -695,4 +708,6 @@ public final class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel reloj;
     private javax.swing.JTextArea terminados;
     // End of variables declaration//GEN-END:variables
+
+    
 }

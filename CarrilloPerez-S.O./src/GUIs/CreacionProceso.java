@@ -180,12 +180,14 @@ public class CreacionProceso extends javax.swing.JFrame {
             System.out.println("Se agregó cpu bound.");
             if(this.sim.empezoYa()){
                 this.sim.actualizarListos(creado);
+                this.sim.informarCPUS();
             }else{
                 colaprocesos.agregar(creado);
             }
         }else if ("I/O Bound".equals(tipot)){
             if(this.sim.empezoYa()){
                             IOBound detalles = new IOBound(this.sim,this,nombrel,inst,prio);
+                            this.sim.informarCPUS();
             }else{
                             IOBound detalles = new IOBound(this,nombrel,inst,prio);
             }

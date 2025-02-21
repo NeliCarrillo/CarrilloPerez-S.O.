@@ -62,6 +62,35 @@ public class Cola {
         tamaño--;
         return elemento;
     }
+    
+    public Proceso obtenerUltimo() {
+        if (estaVacia()) {
+            System.out.println("La cola está vacía. No se puede remover un elemento.");
+            return null;
+        }
+
+        // Si solo hay un elemento en la cola
+        if (frente == fin) {
+            Proceso elemento = fin.getElemento(); // Obtener el elemento del único nodo
+            frente = null; // La cola queda vacía
+            fin = null;
+            tamaño--;
+            return elemento;
+        }
+
+        // Si hay más de un elemento, recorrer hasta el penúltimo nodo
+        Nodo aux = frente;
+        while (aux.getSiguiente() != fin) {
+            aux = aux.getSiguiente(); // Avanzar al siguiente nodo
+        }
+
+        // Ahora `aux` es el penúltimo nodo
+        Proceso elemento = fin.getElemento(); // Obtener el elemento del último nodo
+        fin = aux; // Actualizar el puntero `fin` al penúltimo nodo
+        fin.setSiguiente(null); // Eliminar la referencia al último nodo
+        tamaño--;
+        return elemento;
+    }
 
     // Método para obtener el tamaño de la cola
     public int getTamaño() {
