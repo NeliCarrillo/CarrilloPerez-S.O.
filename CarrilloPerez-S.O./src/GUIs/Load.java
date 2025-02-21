@@ -39,9 +39,9 @@ public class Load extends javax.swing.JFrame {
 
             // Restaurar los valores en la simulación
             Semaforo semaf = estado.getSemaforo();
-            Cola colaL = estado.getColaL();
-            Cola colaT = estado.getColaT();
-            Cola colaB = estado.getColaB();
+            Cola colaL = estado.getColaListos();
+            Cola colaT = estado.getColaTerminados();
+            Cola colaB = estado.getColaBloqueados();
             int cicloreloj = estado.getCicloReloj();
             int numcpu = estado.getNumProcesadores();
             String pl = estado.getPolitica();

@@ -31,24 +31,9 @@ public class Cola {
             fin = nuevoNodo;    // y también el fin
         } else {
             fin.setSiguiente(nuevoNodo); // Enlazar el nuevo nodo al final de la cola
-            //System.out.println("conexion desde .  "+fin.getElemento().getId()+" . a   "+fin.getSiguiente().getElemento().getId());
-            //salvoguardo = fin;
             fin = nuevoNodo;            // Actualizar el fin
         }
         tamaño++;
-        /*Nodo salvo = frente;
-        while(salvo.getSiguiente()!=null){
-            System.out.println("El siguiente de "+salvo.getElemento().getId()+"es"+salvo.getSiguiente().getElemento().getId());
-            resultado += salvo.getElemento().print()+"\n"+salvo.getSiguiente().getElemento().print()+"\n";
-            salvo=salvo.getSiguiente();
-        }
-        while(salvoguardo.getSiguiente()!=null){
-                        System.out.println("\nsalvog \nEl siguiente de "+salvoguardo.getElemento().getId()+"es"+salvoguardo.getSiguiente().getElemento().getId());
-            resultado += salvoguardo.getElemento().print()+"\n"+salvoguardo.getSiguiente().getElemento().print()+"\n";
-            salvoguardo=salvoguardo.getSiguiente();
-        }
-        System.out.println("\nIniciolol "+frente.getElemento().getId()+"\nFin "+fin.getElemento().getId()+"\n\n"+resultado);
-        */
     }
     
     public synchronized void agregarPpio(Proceso el){
@@ -118,5 +103,10 @@ public class Cola {
     public void setFrente(Nodo frente) {
         this.frente = frente;
     }
+    
+    public void setFinal(Nodo frente) {
+        this.fin = frente;
+    }
+    
     
 }

@@ -12,9 +12,9 @@ import EDD.Cola;
  */
 public class EstadoSimulacion {
     private Semaforo semaforo;
-    private Cola colaL;
-    private Cola colaT;
-    private Cola colaB;
+    private Cola colaListos;
+    private Cola colaTerminados;
+    private Cola colaBloqueados;
     private int cicloReloj;
     private int numProcesadores;
     private Proceso en1;
@@ -26,9 +26,9 @@ public class EstadoSimulacion {
     // Constructor2
     public EstadoSimulacion(String politca, Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2, Proceso c3) {
         this.semaforo = semaforo;
-        this.colaL = colaL;
-        this.colaT = colaT;
-        this.colaB = colaB;
+        this.colaListos = colaL;
+        this.colaTerminados = colaT;
+        this.colaBloqueados = colaB;
         this.cicloReloj = cicloReloj;
         this.numProcesadores=n;
         this.en1=c1;
@@ -39,9 +39,9 @@ public class EstadoSimulacion {
     
     public EstadoSimulacion(String politca,Semaforo semaforo, Cola colaL, Cola colaT, Cola colaB, int cicloReloj,int n,Proceso c1,Proceso c2) {
         this.semaforo = semaforo;
-        this.colaL = colaL;
-        this.colaT = colaT;
-        this.colaB = colaB;
+        this.colaListos = colaL;
+        this.colaTerminados = colaT;
+        this.colaBloqueados = colaB;
         this.cicloReloj = cicloReloj;
         this.numProcesadores=n;
         this.en1=c1;
@@ -61,30 +61,30 @@ public class EstadoSimulacion {
         this.semaforo = semaforo;
     }
 
-    public Cola getColaL() {
-        return colaL;
+    public Cola getColaListos() {
+        return colaListos;
     }
 
-    public void setColaL(Cola colaL) {
-        this.colaL = colaL;
+    public void setColaListos(Cola colaListos) {
+        this.colaListos = colaListos;
     }
 
-    public Cola getColaT() {
-        return colaT;
+    public Cola getColaTerminados() {
+        return colaTerminados;
     }
 
-    public void setColaT(Cola colaT) {
-        this.colaT = colaT;
+    public void setColaTerminados(Cola colaTerminados) {
+        this.colaTerminados = colaTerminados;
     }
 
-    public Cola getColaB() {
-        return colaB;
+    public Cola getColaBloqueados() {
+        return colaBloqueados;
     }
 
-    public void setColaB(Cola colaB) {
-        this.colaB = colaB;
+    public void setColaBloqueados(Cola colaBloqueados) {
+        this.colaBloqueados = colaBloqueados;
     }
-
+    
     public int getCicloReloj() {
         return cicloReloj;
     }
