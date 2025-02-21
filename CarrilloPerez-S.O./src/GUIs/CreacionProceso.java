@@ -38,6 +38,8 @@ public class CreacionProceso extends javax.swing.JFrame {
         this.sim=si;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        
+
     }
     
     
@@ -182,7 +184,11 @@ public class CreacionProceso extends javax.swing.JFrame {
                 colaprocesos.agregar(creado);
             }
         }else if ("I/O Bound".equals(tipot)){
-            IOBound detalles = new IOBound(this,nombrel,inst,prio);
+            if(this.sim.empezoYa()){
+                            IOBound detalles = new IOBound(this.sim,this,nombrel,inst,prio);
+            }else{
+                            IOBound detalles = new IOBound(this,nombrel,inst,prio);
+            }
         }
         tipot="CPU Bound";
     }//GEN-LAST:event_saveActionPerformed
@@ -197,7 +203,7 @@ public class CreacionProceso extends javax.swing.JFrame {
             this.sim.iniciar();
             this.dispose();
         }else{
-            
+            this.dispose();
         }
     }//GEN-LAST:event_FinalizarActionPerformed
 

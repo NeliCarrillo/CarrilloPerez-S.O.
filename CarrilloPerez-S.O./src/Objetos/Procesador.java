@@ -37,6 +37,10 @@ public class Procesador extends Thread {
                             procesoActual = this.simulacion.getColaL().obtenerProceso(); // Obtener el siguiente proceso
                             procesoActual.setEstado("Running");
                             this.simulacion.textoListos(this.simulacion.getColaL().print());
+                        }else if("SPN".equals(this.simulacion.getPolitica())){
+                            procesoActual = this.simulacion.getColaL().eliminarMasCorto(); // Obtener el siguiente proceso
+                            procesoActual.setEstado("Running");
+                            this.simulacion.textoListos(this.simulacion.getColaL().print());
                         }
                     }
                     semaforo.liberar(); // Liberar el semáforo
@@ -151,7 +155,7 @@ public class Procesador extends Thread {
                     }
                 }
             }
-        }else if ("FCFS".equals(this.simulacion.getPolitica())){
+        }else if ("FCFS".equals(this.simulacion.getPolitica())||"SPN".equals(this.simulacion.getPolitica())){
             if("CPU Bound".equals(proceso.getTipo())||proceso.desbloqueada()){
                 //System.out.println("Procesador " + id + " ejecutando proceso: " + proceso.getNombre());
                 while (proceso.getNumeroInstrucciones() > 0 && !this.simulacion.hayCambioPend()) {

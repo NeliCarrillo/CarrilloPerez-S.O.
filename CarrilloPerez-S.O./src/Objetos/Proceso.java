@@ -17,6 +17,8 @@ public class Proceso{
     private int MAR;
     private boolean EScompletada;
     private int ciclosBloqueado;
+    private int ciclosEspera=0;
+    private int TasaRespuesta;
 
     // Constructor para los CPU Bound
     public Proceso(String nombre, int numeroInstrucciones, String tipo, int prioridad) {
@@ -75,6 +77,11 @@ public class Proceso{
     public int getCiclosParaGenerarExcepcion() {
         return ciclosParaGenerarExcepcion;
     }
+    
+    public int getTasaRespuesta() {
+        this.TasaRespuesta = ((ciclosEspera+this.numeroInstruccionesRestantes)/this.numeroInstruccionesRestantes);
+        return TasaRespuesta;
+    }
 
     public void setCiclosParaGenerarExcepcion(int ciclosParaGenerarExcepcion) {
         this.ciclosParaGenerarExcepcion = ciclosParaGenerarExcepcion;
@@ -114,6 +121,9 @@ public class Proceso{
 
     public String getEstado() {
         return estado;
+    }
+    public void sumarEspera(){
+        this.ciclosEspera++;
     }
 
     public void setEstado(String estado) {

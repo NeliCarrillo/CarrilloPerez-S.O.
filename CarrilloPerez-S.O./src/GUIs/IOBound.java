@@ -16,6 +16,7 @@ public class IOBound extends javax.swing.JFrame {
     private int instruc;
     private String name; 
     private int prio;
+    private Simulacion sim;
     /**
      * Creates new form IOBound
      * @param inty
@@ -23,6 +24,18 @@ public class IOBound extends javax.swing.JFrame {
     public IOBound(CreacionProceso intey,String name,int instruc,int prio) {
         initComponents();
         setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        inty = intey;
+        this.instruc = instruc;
+        this.name = name;
+        this.prio=prio;
+    }
+    
+    public IOBound(Simulacion simss,CreacionProceso intey,String name,int instruc,int prio) {
+        initComponents();
+        setVisible(true);
+        this.sim = simss;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         inty = intey;
@@ -96,7 +109,11 @@ public class IOBound extends javax.swing.JFrame {
         int ciclosc =Integer.parseInt(this.cicloscompletar.getText());
         Proceso ele = new Proceso(this.name,this.instruc,"I/O Bound",this.prio,ciclose,ciclosc);
         System.out.println("se agrego io bound");
-        colaprocesos.agregar(ele);
+        if(this.sim!=null){
+            this.sim.actualizarListos(ele);
+        }else{
+                    colaprocesos.agregar(ele);
+        }
         inty.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_saveActionPerformed

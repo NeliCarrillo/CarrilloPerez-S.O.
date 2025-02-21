@@ -6,7 +6,7 @@ package GUIs;
 import EDD.Cola;
 import EDD.Nodo;
 import static GUIs.CreacionProceso.colaprocesos;
-import Objetos.BIOS;
+import Objetos.ManejadorProcesos;
 import Objetos.EstadoSimulacion;
 import Objetos.Procesador;
 import Objetos.Proceso;
@@ -35,7 +35,7 @@ public final class Simulacion extends javax.swing.JFrame {
     Procesador cpu1;
     Procesador cpu2;
     Procesador cpu3;
-    BIOS bios;
+    ManejadorProcesos bios;
     int numcpu;
     String politica;
     boolean huboCambio=false;
@@ -106,7 +106,7 @@ public final class Simulacion extends javax.swing.JFrame {
         this.setPolitica(plt);
         this.semf=semf;
         this.setCicloreloj(d);
-        this.bios= new BIOS(this);
+        this.bios= new ManejadorProcesos(this);
         this.numcpu=i;
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
@@ -138,7 +138,7 @@ public final class Simulacion extends javax.swing.JFrame {
         this.setPolitica(plt);
         this.semf=semf;
         this.setCicloreloj(d);
-        this.bios= new BIOS(this);
+        this.bios= new ManejadorProcesos(this);
         this.numcpu=i;
         this.listos.setEditable(false);
         this.bloqueados.setEditable(false);
@@ -305,7 +305,7 @@ public final class Simulacion extends javax.swing.JFrame {
             cpu2 = new Procesador(2,semf,this.getCicloreloj(),this);
             cpu2.start();
         }
-        this.bios=new BIOS(this);
+        this.bios=new ManejadorProcesos(this);
         bios.start();
     }
     
@@ -362,7 +362,7 @@ public final class Simulacion extends javax.swing.JFrame {
     
     
     public void guardarEstado(String rutaArchivo) {
-        detenerHilos(); // Detener los hilos antes de guardar
+        /*detenerHilos(); // Detener los hilos antes de guardar
         unirColaListos();
         if(this.numcpu==3){
             Proceso p1 = cpu1.getProcesoActual();
@@ -393,6 +393,15 @@ public final class Simulacion extends javax.swing.JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }*/
+        EstadoSimulacion estado = new EstadoSimulacion(this.numcpu,this.cicloreloj);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try (FileWriter writer = new FileWriter(rutaArchivo)) {
+            gson.toJson(estado, writer); // Serializar el objeto contenedor
+            System.out.println("Estado de la simulación guardado en: " + rutaArchivo);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
@@ -615,6 +624,8 @@ public final class Simulacion extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        CreacionProceso n = new CreacionProceso(this,this.numcpu,this.cicloreloj);
+        n.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

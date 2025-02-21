@@ -13,13 +13,13 @@ import static Objetos.Procesador.cicloReloj;
  *hola 
  * @author nelsoncarrillo
  */
-public class BIOS extends Thread{
+public class ManejadorProcesos extends Thread{
     private Simulacion sim;
     private boolean activo; 
     private int ciclos=0;
 
 
-    public BIOS(Simulacion sim2) {
+    public ManejadorProcesos(Simulacion sim2) {
         this.sim=sim2;
         this.activo=true;
     }
@@ -28,6 +28,7 @@ public class BIOS extends Thread{
     public void run() {
         while (activo) {
             try {
+                    checkListos();
                     checkIO();
                     Thread.sleep(cicloReloj);
                     ciclos++;
@@ -77,40 +78,49 @@ public class BIOS extends Thread{
         }
     }
     
+    private void checkListos(){
+        Cola colaL = sim.getColaListos();
+        Nodo actual = colaL.getTop();
+        while(actual!=null){
+            actual.getElemento().sumarEspera();
+            actual=actual.getSiguiente();
+        }
+    }
+    
     public void detener() {
         this.activo = false;
     }
     
 
-    public BIOS(Runnable task) {
+    public ManejadorProcesos(Runnable task) {
         super(task);
     }
 
-    public BIOS(ThreadGroup group, Runnable task) {
+    public ManejadorProcesos(ThreadGroup group, Runnable task) {
         super(group, task);
     }
 
-    public BIOS(String name) {
+    public ManejadorProcesos(String name) {
         super(name);
     }
 
-    public BIOS(ThreadGroup group, String name) {
+    public ManejadorProcesos(ThreadGroup group, String name) {
         super(group, name);
     }
 
-    public BIOS(Runnable task, String name) {
+    public ManejadorProcesos(Runnable task, String name) {
         super(task, name);
     }
 
-    public BIOS(ThreadGroup group, Runnable task, String name) {
+    public ManejadorProcesos(ThreadGroup group, Runnable task, String name) {
         super(group, task, name);
     }
 
-    public BIOS(ThreadGroup group, Runnable task, String name, long stackSize) {
+    public ManejadorProcesos(ThreadGroup group, Runnable task, String name, long stackSize) {
         super(group, task, name, stackSize);
     }
 
-    public BIOS(ThreadGroup group, Runnable task, String name, long stackSize, boolean inheritInheritableThreadLocals) {
+    public ManejadorProcesos(ThreadGroup group, Runnable task, String name, long stackSize, boolean inheritInheritableThreadLocals) {
         super(group, task, name, stackSize, inheritInheritableThreadLocals);
     }
     

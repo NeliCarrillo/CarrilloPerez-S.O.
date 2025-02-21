@@ -4,6 +4,11 @@
  */
 package GUIs;
 
+import Objetos.EstadoSimulacion;
+import com.google.gson.Gson;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author nelsoncarrillo
@@ -11,6 +16,8 @@ package GUIs;
 public class NumProcesadores extends javax.swing.JFrame {
     
     private Load carga;
+    private int cicloreloj;
+    private int numcpu;
 
     /**
      * Creates new form NumProcesadores
@@ -32,6 +39,46 @@ public class NumProcesadores extends javax.swing.JFrame {
     
     public int getDuracion(){
         return Integer.parseInt(duracion.getText());
+    }
+    
+    public void restablecerEstado(String rutaArchivo) {
+        Gson gson = new Gson();
+
+        try (FileReader reader = new FileReader(rutaArchivo)) {
+            // Deserializar el archivo JSON al objeto EstadoSimulacion
+            EstadoSimulacion estado = gson.fromJson(reader, EstadoSimulacion.class);
+
+           /* // Restaurar los valores en la simulación
+            Semaforo semaf = estado.getSemaforo();
+            Cola colaL = estado.getColaListos();
+            Cola colaT = estado.getColaTerminados();
+            Cola colaB = estado.getColaBloqueados();
+            int cicloreloj = estado.getCicloReloj();
+            int numcpu = estado.getNumProcesadores();
+            String pl = estado.getPolitica();
+            
+            if(numcpu==2){
+                Simulacion sim = new Simulacion(pl,cicloreloj, numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),semaf);
+                return sim;
+            }else{
+                Simulacion sim = new Simulacion(pl,cicloreloj,numcpu,colaL,colaB,colaT,estado.getEn1(),estado.getEn2(),estado.getEn3(),semaf);
+                return sim;
+            }
+
+            
+            /*if (this.numcpu >= 2) {
+                this.cpu1.setProcesoActual(estado.getEn1());
+                this.cpu2.setProcesoActual(estado.getEn2());
+            }
+            if (this.numcpu >= 3) {
+                this.cpu3.setProcesoActual(estado.getEn3());
+            }*/
+            //this.actualizarListos();
+            cicloreloj = estado.getCicloReloj();
+            numcpu = estado.getNumProcesadores();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -129,6 +176,12 @@ public class NumProcesadores extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.restablecerEstado("test//simulacion.json");
+         Simulacion sim = new Simulacion("FCFS",numcpu,cicloreloj);
+        CreacionProceso l = new CreacionProceso(sim,numcpu,cicloreloj);
+        sim.setVisible(true);
+        l.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

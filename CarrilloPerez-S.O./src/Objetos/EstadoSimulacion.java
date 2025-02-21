@@ -48,6 +48,11 @@ public class EstadoSimulacion {
         this.en2=c2;
         this.politica=politca;
     }
+    
+    public EstadoSimulacion(int cpu, int dur){
+        this.numProcesadores=cpu;
+        this.cicloReloj=dur;
+    }
 
     // Getters y setters
     public Semaforo getSemaforo() {

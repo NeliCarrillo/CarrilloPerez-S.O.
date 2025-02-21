@@ -1,36 +1,4 @@
 {
-  "semaforo": {
-    "contador": 1
-  },
-  "colaListos": {
-    "tamaño": 0,
-    "resultado": ""
-  },
-  "colaTerminados": {
-    "tamaño": 0,
-    "resultado": ""
-  },
-  "colaBloqueados": {
-    "tamaño": 0,
-    "resultado": ""
-  },
-  "cicloReloj": 500,
-  "numProcesadores": 2,
-  "en1": {
-    "id": 1,
-    "idProcesador": 0,
-    "nombre": "234",
-    "numeroInstruccionesRestantes": 310,
-    "numerototalInstrucciones": 0,
-    "ciclosParaGenerarExcepcion": 0,
-    "ciclosParaSatisfacerExcepcion": 0,
-    "tipo": "CPU Bound",
-    "prioridad": 234,
-    "estado": "Running",
-    "PC": 15,
-    "MAR": 14,
-    "EScompletada": false,
-    "ciclosBloqueado": 0
-  },
-  "politica": "FCFS"
+  "cicloReloj": 1000,
+  "numProcesadores": 2
 }
